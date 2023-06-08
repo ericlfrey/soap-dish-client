@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Offcanvas, Button } from 'react-bootstrap';
+import { signOut } from '../../utils/auth';
+import styles from './ProfileDrawer.module.css';
 
 export default function ProfileDrawer() {
   const [show, setShow] = useState(false);
@@ -9,18 +11,21 @@ export default function ProfileDrawer() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch
-      </Button>
+      <button type="button" onClick={handleShow} className={styles.profileBtn}>
+        Profile
+      </button>
 
-      <Offcanvas show={show} onHide={handleClose}>
+      <Offcanvas show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title>Profile</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
+          have chosen. Like, text, images, lists,
         </Offcanvas.Body>
+        <Button type="button" onClick={signOut}>
+          Sign Out
+        </Button>
       </Offcanvas>
     </>
   );

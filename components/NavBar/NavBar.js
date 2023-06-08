@@ -38,9 +38,9 @@ export default function NavBar() {
               </li>
             </div>
             <ProfileDrawer />
-            <button type="button" className={styles.signOutBtn} onClick={signOut}>
+            {/* <button type="button" className={styles.signOutBtn} onClick={signOut}>
               Sign Out
-            </button>
+            </button> */}
           </ul>
         </div>
       </div>
