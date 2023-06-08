@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import styles from './NewRecipeForm.module.css';
+import getOils from '../../utils/data/oilData';
 
 export default function NewRecipeForm() {
   const initialState = {
@@ -10,6 +12,11 @@ export default function NewRecipeForm() {
   const [oils, setOils] = useState([]);
   const [showTotalOil, setShowTotalOil] = useState(true);
   const [showOils, setShowOils] = useState(false);
+  const [allOils, setAllOils] = useState([]);
+
+  useEffect(() => {
+    getOils().then(setAllOils);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,7 +51,7 @@ export default function NewRecipeForm() {
   };
 
   return (
-    <div className="recipe-form-wrapper">
+    <div className={styles.recipeFormWrapper}>
       <div className="recipe-form-container">
         {showTotalOil
           ? (
@@ -70,14 +77,12 @@ export default function NewRecipeForm() {
             <Form>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Select name="currentOil" id="currentOil">
-                  <option value="Olive Oil">Olive Oil</option>
-                  <option value="Coconut Oil">Coconut Oil</option>
-                  <option value="Palm Oil">Palm Oil</option>
+                  {allOils.map((oil) => <option key={oil.id} value={oil.name}>{oil.name}</option>)}
                 </Form.Select>
                 <Form.Text>Enter total weight of oils in ounces</Form.Text>
               </Form.Group>
               <Button variant="primary" type="button" onClick={handleSubmitOils}>
-                Submit
+                Add Oil
               </Button>
               <Button variant="success" type="button" onClick={finishOilList}>
                 Done
