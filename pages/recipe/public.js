@@ -11,6 +11,7 @@ export default function PublicViewPage() {
 
   return (
     <>
+      {console.log(publicRecipes)}
       <h1>PublicViewPage</h1>
       <div className="projectCardsDiv">
         {publicRecipes.map((recipe) => (
@@ -19,6 +20,7 @@ export default function PublicViewPage() {
             id={recipe.id}
             title={recipe.title}
             description={recipe.description}
+            uid={recipe.maker?.uid}
           />
         ))}
       </div>
