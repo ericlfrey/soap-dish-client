@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #F0A04B;
+  background-color: #748CAB;
   overflow: hidden;
   position: sticky;
   top: 0;
@@ -29,13 +29,13 @@
 
 .navLink,
 .navLink:focus {
-  color: #183A1D;
+  color: #0D1321;
   margin-right: 30px;
 }
 
 .navLink:hover,
 .signOutBtn:hover {
-  color: #327a3d;
+  color: #1D2D44;
 }
 
 .logo:hover {
@@ -44,5 +44,5 @@
 
 .signOutBtn {
   all: unset;
-  color: #183A1D;
+  color: #0D1321;
 }

@@ -29,14 +29,13 @@ export default function NavBar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link passHref href="/project/new">
+                <Link passHref href="/recipe/new">
                   <a className={`${styles.navLink} nav-link`}>
-                    Add New Project
+                    Add New Recipe
                   </a>
                 </Link>
               </li>
             </div>
-            {/* <SearchBar /> */}
             <button type="button" className={styles.signOutBtn} onClick={signOut}>
               Sign Out
             </button>
