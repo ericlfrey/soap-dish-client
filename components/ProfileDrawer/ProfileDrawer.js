@@ -1,5 +1,8 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
-import { Offcanvas, Button } from 'react-bootstrap';
+import { Offcanvas } from 'react-bootstrap';
+import Link from 'next/link';
 import { signOut } from '../../utils/auth';
 import styles from './ProfileDrawer.module.css';
 
@@ -20,12 +23,36 @@ export default function ProfileDrawer() {
           <Offcanvas.Title>Profile</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists,
+          <ul>
+            <li className={styles.listItem} onClick={handleClose}>
+              <Link href="/">
+                Your Recipes
+              </Link>
+            </li>
+            <li className={styles.listItem} onClick={handleClose}>
+              <Link href="/recipe/favorites">
+                Favorite Recipes
+              </Link>
+            </li>
+            <li className={styles.listItem} onClick={handleClose}>
+              <Link href="/recipe/public">
+                Public Recipes
+              </Link>
+            </li>
+            <li className={styles.listItem} onClick={handleClose}>
+              <Link href="/recipe/new">
+                Add New Recipe
+              </Link>
+            </li>
+            <li className={styles.listItem} onClick={handleClose}>
+              <button type="button" onClick={signOut} className={styles.profileBtn}>
+                <Link href="/">
+                  Sign Out
+                </Link>
+              </button>
+            </li>
+          </ul>
         </Offcanvas.Body>
-        <Button type="button" onClick={signOut}>
-          Sign Out
-        </Button>
       </Offcanvas>
     </>
   );
