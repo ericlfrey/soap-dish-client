@@ -20,3 +20,9 @@ a {
 body {
   background-color: #F0EBD8;
 }
+
+.projectCardsDiv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
