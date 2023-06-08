@@ -18,8 +18,8 @@ const getUserRecipes = (uid) => new Promise((resolve, reject) => {
     })
     .catch(reject);
 });
-const getAllRecipes = () => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/recipes`, {
+const getPublicRecipes = () => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/recipes/public`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ const deleteRecipe = (id) => new Promise((resolve, reject) => {
 
 export {
   getUserRecipes,
-  getAllRecipes,
+  getPublicRecipes,
   getSingleRecipe,
   createRecipe,
   updateRecipe,
