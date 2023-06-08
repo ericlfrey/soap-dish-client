@@ -2,7 +2,6 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './NavBar.module.css';
-import { signOut } from '../../utils/auth';
 import ProfileDrawer from '../ProfileDrawer/ProfileDrawer';
 
 export default function NavBar() {
