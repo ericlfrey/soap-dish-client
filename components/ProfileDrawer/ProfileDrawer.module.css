@@ -1,0 +1,17 @@
+.profileBtn {
+  all: unset;
+  color: #0D1321;
+}
+
+.profileBtn:hover {
+  color: #1D2D44;
+}
+
+.listItem {
+  list-style-type: none;
+}
+
+.displayPhoto {
+  border-radius: 50%;
+  cursor: pointer;
+}

@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './NavBar.module.css';
-import { signOut } from '../../utils/auth';
+import ProfileDrawer from '../ProfileDrawer/ProfileDrawer';
 
 export default function NavBar() {
   return (
@@ -21,14 +21,14 @@ export default function NavBar() {
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul className={`navbar-nav me-auto ${styles.navbarNav}`}>
             <div className={`nav-links ${styles.navLinks}`}>
-              <li className="nav-item">
+              <li className={`nav-item ${styles.navItem}`}>
                 <Link passHref href="/">
                   <a className={`${styles.navLink} nav-link`}>
                     Home
                   </a>
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className={`nav-item ${styles.navItem}`}>
                 <Link passHref href="/recipe/new">
                   <a className={`${styles.navLink} nav-link`}>
                     Add New Recipe
@@ -36,9 +36,10 @@ export default function NavBar() {
                 </Link>
               </li>
             </div>
-            <button type="button" className={styles.signOutBtn} onClick={signOut}>
+            <ProfileDrawer />
+            {/* <button type="button" className={styles.signOutBtn} onClick={signOut}>
               Sign Out
-            </button>
+            </button> */}
           </ul>
         </div>
       </div>
