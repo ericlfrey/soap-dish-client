@@ -3,20 +3,27 @@
 import React, { useState } from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import Link from 'next/link';
+import Image from 'next/image';
 import { signOut } from '../../utils/auth';
 import styles from './ProfileDrawer.module.css';
+import { useAuth } from '../../utils/context/authContext';
 
 export default function ProfileDrawer() {
   const [show, setShow] = useState(false);
-
+  const { user } = useAuth();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   return (
     <>
-      <button type="button" onClick={handleShow} className={styles.profileBtn}>
-        Profile
-      </button>
+      <Image
+        src={user.fbUser.photoURL}
+        alt="Picture of the user"
+        className={styles.displayPhoto}
+        width="60"
+        height="60"
+        onClick={handleShow}
+      />
 
       <Offcanvas show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header closeButton>

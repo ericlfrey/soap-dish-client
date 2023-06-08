@@ -10,3 +10,8 @@
 .listItem {
   list-style-type: none;
 }
+
+.displayPhoto {
+  border-radius: 50%;
+  cursor: pointer;
+}

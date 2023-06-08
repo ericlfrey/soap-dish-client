@@ -46,3 +46,8 @@
   all: unset;
   color: #0D1321;
 }
+
+.navItem {
+  display: flex;
+  align-items: center;
+}

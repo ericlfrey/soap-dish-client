@@ -21,14 +21,14 @@ export default function NavBar() {
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul className={`navbar-nav me-auto ${styles.navbarNav}`}>
             <div className={`nav-links ${styles.navLinks}`}>
-              <li className="nav-item">
+              <li className={`nav-item ${styles.navItem}`}>
                 <Link passHref href="/">
                   <a className={`${styles.navLink} nav-link`}>
                     Home
                   </a>
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className={`nav-item ${styles.navItem}`}>
                 <Link passHref href="/recipe/new">
                   <a className={`${styles.navLink} nav-link`}>
                     Add New Recipe
