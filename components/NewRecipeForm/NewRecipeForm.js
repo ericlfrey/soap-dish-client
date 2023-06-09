@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import styles from './NewRecipeForm.module.css';
-import getOils from '../../utils/data/oilData';
+import { getOils, getSingleOil } from '../../utils/data/oilData';
 
 export default function NewRecipeForm() {
   const initialState = {
@@ -27,23 +27,26 @@ export default function NewRecipeForm() {
   };
   const handleSubmitTotalOil = (e) => {
     e.preventDefault();
-    console.warn(formInput);
+    console.log(formInput);
     setShowTotalOil(false);
     setShowOils(true);
   };
 
-  const handleSubmitOils = () => {
+  const addOils = () => {
     const currentOil = document.getElementById('currentOil');
-    if (oils.includes(currentOil.value)) {
-      window.alert('Oil already in list');
-    } else {
-      oils.push(currentOil.value);
-      setOils(oils);
-      setFormInput({
-        ...formInput,
-        oilList: oils,
-      });
-    }
+    getSingleOil(currentOil.value).then((selectedOil) => {
+      const oilExists = oils.some((oil) => oil.id === selectedOil.id);
+      if (oilExists) {
+        window.alert('Oil already in list');
+      } else {
+        const updatedOils = [...oils, selectedOil];
+        setOils(updatedOils);
+        setFormInput((prevState) => ({
+          ...prevState,
+          oilList: updatedOils,
+        }));
+      }
+    });
   };
 
   const finishOilList = () => {
@@ -77,11 +80,11 @@ export default function NewRecipeForm() {
             <Form>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Select name="currentOil" id="currentOil">
-                  {allOils.map((oil) => <option key={oil.id} value={oil.name}>{oil.name}</option>)}
+                  {allOils.map((oil) => <option key={oil.id} value={oil.id}>{oil.name}</option>)}
                 </Form.Select>
                 <Form.Text>Enter total weight of oils in ounces</Form.Text>
               </Form.Group>
-              <Button variant="primary" type="button" onClick={handleSubmitOils}>
+              <Button variant="primary" type="button" onClick={addOils}>
                 Add Oil
               </Button>
               <Button variant="success" type="button" onClick={finishOilList}>
@@ -98,7 +101,9 @@ export default function NewRecipeForm() {
         </section>
         <section>
           {formInput.oilList?.map((oil) => (
-            <h3 key={oil}>{oil}</h3>
+            <div key={oil.id}>
+              <h3 key={oil.id}>{oil.name}</h3>
+            </div>
           ))}
         </section>
       </div>

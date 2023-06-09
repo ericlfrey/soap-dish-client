@@ -18,4 +18,16 @@ const getOils = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export default getOils;
+const getSingleOil = (id) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/oils/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve((data)))
+    .catch(reject);
+});
+
+export { getOils, getSingleOil };
