@@ -27,7 +27,6 @@ export default function NewRecipeForm() {
   };
   const handleSubmitTotalOil = (e) => {
     e.preventDefault();
-    console.log(formInput);
     setShowTotalOil(false);
     setShowOils(true);
   };
@@ -41,16 +40,32 @@ export default function NewRecipeForm() {
       } else {
         const updatedOils = [...oils, selectedOil];
         setOils(updatedOils);
-        setFormInput((prevState) => ({
-          ...prevState,
-          oilList: updatedOils,
-        }));
+        // setFormInput((prevState) => ({
+        //   ...prevState,
+        //   oilList: updatedOils,
+        // }));
       }
     });
   };
 
   const finishOilList = () => {
     setShowOils(false);
+  };
+
+  const handleAmountChange = (e) => {
+    const { name, value } = e.target;
+    const oilId = parseInt(name, 10);
+    const updatedOils = oils.map((oil) => (oil.id === oilId ? { ...oil, amount: value } : oil));
+    setOils(updatedOils);
+    setFormInput((prevState) => ({
+      ...prevState,
+      oilList: [updatedOils],
+    }));
+  };
+
+  const taco = (e) => {
+    e.preventDefault();
+    console.log(formInput);
   };
 
   return (
@@ -100,11 +115,30 @@ export default function NewRecipeForm() {
           <p>Total Weight:{` ${formInput.totalOil} oz.`}</p>
         </section>
         <section>
-          {formInput.oilList?.map((oil) => (
-            <div key={oil.id}>
-              <h3 key={oil.id}>{oil.name}</h3>
-            </div>
-          ))}
+          {oils?.length > 0
+            ? (
+              <>
+                <h3>Oils:</h3>
+                <Form onSubmit={taco}>
+                  {oils?.map((oil) => (
+                    <div key={oil.id}>
+                      <h3 key={oil.id}>{oil.name}</h3>
+                      <Form.Control
+                        id={`oilAmount--${oil.id}`}
+                        name={oil.id}
+                        type="number"
+                        placeholder="Amount in ounces"
+                        onChange={handleAmountChange}
+                      // value={ }
+                      />
+                    </div>
+                  ))}
+                  <Button variant="primary" type="submit">Submit</Button>
+                </Form>
+              </>
+            )
+            : ''}
+
         </section>
       </div>
     </div>
