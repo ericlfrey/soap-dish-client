@@ -8,7 +8,7 @@ export default function TestRecipeForm() {
     totalOil: 32,
     oilList: [],
     title: '',
-    waterAmount: 33,
+    waterPercentage: 33,
     lyeAmount: 0,
     superFat: 5,
     description: '',
@@ -60,15 +60,24 @@ export default function TestRecipeForm() {
     //   const amount = parseInt(oil.amount, 10);
     //   return { oilId: oil.id, amount };
     // });
+    const totalOil = oils.reduce((a, b) => a + Number(b.amount), 0);
+    if (totalOil !== Number(formInput.totalOil)) {
+      window.alert('Total oil amount does not match');
+      return;
+    }
+    const waterAmount = (formInput.waterPercentage / 100) * totalOil;
     const superFat = parseInt(formInput.superFat, 10) / 100;
-    let lyeAmount = oils.reduce((a, b) => a + b.amount * b.sap, 0);
-    lyeAmount *= (1 - superFat);
+    const lyeAmount = Number(oils.reduce((total, oil) => total
+      + (oil.amount * oil.sap), 0)
+      * (1 - superFat)).toFixed(3);
     setFormInput((prevState) => ({
       ...prevState,
-      // oilList: recipeOils,
+      totalOil,
+      oilList: oils,
       lyeAmount,
+      waterAmount,
     }));
-    console.log(oils, lyeAmount);
+    console.log(formInput);
   };
 
   return (
@@ -87,8 +96,8 @@ export default function TestRecipeForm() {
             <Form.Control
               type="number"
               placeholder="Water as a percent of oils"
-              name="waterAmount"
-              value={formInput.waterAmount}
+              name="waterPercentage"
+              value={formInput.waterPercentage}
               onChange={handleChange}
             />
             <Form.Text>Water as a percent of oils</Form.Text>
