@@ -2,19 +2,21 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
-import { getSingleRecipe } from '../../utils/data/recipeData';
+import { useRouter } from 'next/router';
+import { deleteRecipe, getSingleRecipe } from '../../utils/data/recipeData';
 import { useAuth } from '../../utils/context/authContext';
 
 export default function RecipeDetails({ id }) {
   const [recipe, setRecipe] = useState({});
   const { user } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     getSingleRecipe(id, user.uid).then(setRecipe);
   }, [id, user]);
 
   const handleDelete = () => {
-    console.log('RECIPE DELETED');
+    deleteRecipe(id).then(() => router.push('/'));
   };
 
   const handleFavorite = () => {
