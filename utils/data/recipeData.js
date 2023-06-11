@@ -112,6 +112,25 @@ const unfavoriteRecipe = (recipeId, uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getFavoriteRecipes = (uid) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/recipes/favorites`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 export {
   getUserRecipes,
   getPublicRecipes,
@@ -121,4 +140,5 @@ export {
   deleteRecipe,
   favoriteRecipe,
   unfavoriteRecipe,
+  getFavoriteRecipes,
 };

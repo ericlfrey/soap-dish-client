@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import RecipeCard from '../components/RecipeCard/RecipeCard';
 import { getUserRecipes } from '../utils/data/recipeData';
