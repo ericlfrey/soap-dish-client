@@ -17,7 +17,9 @@ export default function RecipeCard({
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
+        <Link href={`/recipe/${id}`} passHref>
+          <Card.Title>{title}</Card.Title>
+        </Link>
         <Card.Subtitle className="mb-2 text-muted">{description}</Card.Subtitle>
         {user.uid === uid
           ? (
