@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
 import { getSingleRecipe } from '../../utils/data/recipeData';
 import { useAuth } from '../../utils/context/authContext';
@@ -17,10 +17,18 @@ export default function RecipeDetails({ id }) {
     console.log('RECIPE DELETED');
   };
 
+  const handleFavorite = () => {
+    console.log(recipe.is_favorite);
+  };
+
   return (
     <>
+      {console.log(recipe)}
       <Card style={{ width: '18rem' }}>
         <Card.Body>
+          <Button variant="secondary" size="sm" onClick={handleFavorite}>
+            {recipe.is_favorite ? 'Unfavorite' : 'Favorite'}
+          </Button>
           <Card.Title>{recipe.title}</Card.Title>
           {recipe.recipe_oils?.map((oil) => (
             <Card.Subtitle key={oil.id} className="mb-2 text-muted">{oil.oil_name}: {oil.amount} oz</Card.Subtitle>
