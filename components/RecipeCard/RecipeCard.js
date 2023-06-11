@@ -2,12 +2,20 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/context/authContext';
+import { deleteRecipe } from '../../utils/data/recipeData';
 
 export default function RecipeCard({
   id, uid, title, description,
 }) {
   const { user } = useAuth();
+  const router = useRouter();
+
+  const handleDelete = () => {
+    deleteRecipe(id).then(() => router.push('/'));
+  };
+
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body>
@@ -18,7 +26,7 @@ export default function RecipeCard({
             <>
               <Link href={`/recipe/edit/${id}`} passHref>
                 <Card.Link href="#">Edit</Card.Link>
-              </Link><Card.Link href="#">Delete</Card.Link>
+              </Link><Card.Link href="#" onClick={handleDelete}>Delete</Card.Link>
             </>
           )
           : ''}
