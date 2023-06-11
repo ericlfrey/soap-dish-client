@@ -1,9 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { deleteRecipe, getSingleRecipe } from '../../utils/data/recipeData';
+import {
+  deleteRecipe, favoriteRecipe, getSingleRecipe, unfavoriteRecipe,
+} from '../../utils/data/recipeData';
 import { useAuth } from '../../utils/context/authContext';
 
 export default function RecipeDetails({ id }) {
@@ -11,8 +14,12 @@ export default function RecipeDetails({ id }) {
   const { user } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
+  const refreshPage = () => {
     getSingleRecipe(id, user.uid).then(setRecipe);
+  };
+
+  useEffect(() => {
+    refreshPage();
   }, [id, user]);
 
   const handleDelete = () => {
@@ -20,12 +27,16 @@ export default function RecipeDetails({ id }) {
   };
 
   const handleFavorite = () => {
-    console.log(recipe.is_favorite);
+    if (!recipe.is_favorite) {
+      favoriteRecipe(id, user.uid).then(refreshPage);
+    }
+    if (recipe.is_favorite) {
+      unfavoriteRecipe(id, user.uid).then(refreshPage);
+    }
   };
 
   return (
     <>
-      {console.log(recipe)}
       <Card style={{ width: '18rem' }}>
         <Card.Body>
           <Button variant="secondary" size="sm" onClick={handleFavorite}>

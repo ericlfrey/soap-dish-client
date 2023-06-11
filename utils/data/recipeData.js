@@ -86,6 +86,51 @@ const deleteRecipe = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const favoriteRecipe = (recipeId, uid) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/recipes/${recipeId}/favorite`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const unfavoriteRecipe = (recipeId, uid) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/recipes/${recipeId}/unfavorite`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const getFavoriteRecipes = (uid) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/recipes/favorites`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 export {
   getUserRecipes,
   getPublicRecipes,
@@ -93,4 +138,7 @@ export {
   createRecipe,
   updateRecipe,
   deleteRecipe,
+  favoriteRecipe,
+  unfavoriteRecipe,
+  getFavoriteRecipes,
 };
