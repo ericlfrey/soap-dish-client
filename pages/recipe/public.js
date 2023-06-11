@@ -5,8 +5,12 @@ import RecipeCard from '../../components/RecipeCard/RecipeCard';
 export default function PublicViewPage() {
   const [publicRecipes, setPublicRecipes] = useState([]);
 
-  useEffect(() => {
+  const getAllPublicRecipes = () => {
     getPublicRecipes().then(setPublicRecipes);
+  };
+
+  useEffect(() => {
+    getAllPublicRecipes();
   }, []);
 
   return (
@@ -20,6 +24,7 @@ export default function PublicViewPage() {
             title={recipe.title}
             description={recipe.description}
             uid={recipe.maker?.uid}
+            onUpdate={getAllPublicRecipes}
           />
         ))}
       </div>
