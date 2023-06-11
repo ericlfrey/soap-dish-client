@@ -2,18 +2,16 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/context/authContext';
 import { deleteRecipe } from '../../utils/data/recipeData';
 
 export default function RecipeCard({
-  id, uid, title, description,
+  id, uid, title, description, onUpdate,
 }) {
   const { user } = useAuth();
-  const router = useRouter();
 
   const handleDelete = () => {
-    deleteRecipe(id).then(() => router.push('/'));
+    deleteRecipe(id).then(() => onUpdate());
   };
 
   return (
@@ -41,4 +39,5 @@ RecipeCard.propTypes = {
   uid: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
