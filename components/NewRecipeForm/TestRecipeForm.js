@@ -103,7 +103,7 @@ export default function TestRecipeForm() {
       water_amount: formInput.waterAmount,
       oilList: recipeOils,
     };
-    createRecipe(recipeObj).then(() => router.push('/'));
+    createRecipe(recipeObj).then((recipe) => router.push(`/recipe/${recipe.id}`));
   };
 
   return (
