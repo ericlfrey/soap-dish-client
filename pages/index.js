@@ -1,12 +1,30 @@
-// import { useAuth } from '../utils/context/authContext';
+import React, { useEffect, useState } from 'react';
+import RecipeCard from '../components/RecipeCard/RecipeCard';
+import { getUserRecipes } from '../utils/data/recipeData';
+import { useAuth } from '../utils/context/authContext';
 
-function Home() {
-  // const { user } = useAuth();
+export default function Home() {
+  const [recipes, setRecipes] = useState([]);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    getUserRecipes(user.uid).then(setRecipes);
+  }, [user]);
+
   return (
-    <div>
-      <h1>Home Page</h1>
-    </div>
+    <>
+      <h1>User Recipes</h1>
+      <div className="recipeCardsDiv">
+        {recipes.map((recipe) => (
+          <RecipeCard
+            key={recipe.id}
+            id={recipe.id}
+            title={recipe.title}
+            description={recipe.description}
+            uid={recipe.maker?.uid}
+          />
+        ))}
+      </div>
+    </>
   );
 }
-
-export default Home;

@@ -21,7 +21,7 @@ body {
   background-color: #F0EBD8;
 }
 
-.projectCardsDiv {
+.recipeCardsDiv {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
