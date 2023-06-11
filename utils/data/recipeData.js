@@ -36,11 +36,12 @@ const getPublicRecipes = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSingleRecipe = (id) => new Promise((resolve, reject) => {
+const getSingleRecipe = (id, uid) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/recipes/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `${uid}`,
     },
   })
     .then((response) => response.json())
