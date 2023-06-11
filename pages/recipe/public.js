@@ -11,7 +11,6 @@ export default function PublicViewPage() {
 
   return (
     <>
-      {console.log(publicRecipes)}
       <h1>PublicViewPage</h1>
       <div className="projectCardsDiv">
         {publicRecipes.map((recipe) => (
