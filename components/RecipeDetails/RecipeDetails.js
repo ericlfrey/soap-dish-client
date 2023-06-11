@@ -19,7 +19,6 @@ export default function RecipeDetails({ id }) {
 
   return (
     <>
-      {console.log(recipe)}
       <Card style={{ width: '18rem' }}>
         <Card.Body>
           <Card.Title>{recipe.title}</Card.Title>
@@ -31,6 +30,7 @@ export default function RecipeDetails({ id }) {
           <Card.Subtitle className="mb-2 text-muted">Super fat: {recipe.super_fat * 100}%</Card.Subtitle>
           <Card.Text>Description: {recipe.description}</Card.Text>
           <Card.Text>Notes: {recipe.notes}</Card.Text>
+          <Card.Text>{recipe.public ? 'Public' : 'Private'}</Card.Text>
           {user.uid === recipe.maker?.uid
             ? (
               <>
