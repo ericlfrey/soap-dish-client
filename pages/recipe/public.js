@@ -12,7 +12,7 @@ export default function PublicViewPage() {
   return (
     <>
       <h1>PublicViewPage</h1>
-      <div className="projectCardsDiv">
+      <div className="recipeCardsDiv">
         {publicRecipes.map((recipe) => (
           <RecipeCard
             key={recipe.id}
