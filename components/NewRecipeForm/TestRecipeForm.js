@@ -28,6 +28,7 @@ export default function TestRecipeForm() {
     getOils().then(setAllOils);
   }, []);
 
+  // function to look for state change of inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInput((prevState) => ({
@@ -35,10 +36,13 @@ export default function TestRecipeForm() {
       [name]: value,
     }));
   };
-  const handleSubmitTotalOil = (e) => {
-    e.preventDefault();
-  };
 
+  // function to handle submit of total oil
+  // const handleSubmitTotalOil = (e) => {
+  //   e.preventDefault();
+  // };
+
+  // Get oil from select and add to oils array.
   const addOils = () => {
     const currentOil = document.getElementById('currentOil');
     getSingleOil(currentOil.value).then((selectedOil) => {
@@ -52,6 +56,7 @@ export default function TestRecipeForm() {
     });
   };
 
+  // function to handle change of amount of each oil
   const handleAmountChange = (e) => {
     const { name, value } = e.target;
     const oilId = parseInt(name, 10);
@@ -59,18 +64,15 @@ export default function TestRecipeForm() {
     setOils(updatedOils);
   };
 
+  // function to calculate recipe
   const calculateRecipe = (e) => {
     e.preventDefault();
-    // const recipeOils = oils.map((oil) => {
-    //   const amount = parseInt(oil.amount, 10);
-    //   return { oilId: oil.id, amount };
-    // });
     const totalOil = oils.reduce((a, b) => a + Number(b.amount), 0);
     if (totalOil !== Number(formInput.totalOil)) {
       window.alert('Total oil amount does not match');
       return;
     }
-    const waterAmount = (formInput.waterPercentage / 100) * totalOil;
+    const waterAmount = ((formInput.waterPercentage / 100) * totalOil).toFixed(3);
     const superFat = parseInt(formInput.superFat, 10) / 100;
     const lyeAmount = Number(oils.reduce((total, oil) => total
       + (oil.amount * oil.sap), 0)
@@ -84,6 +86,7 @@ export default function TestRecipeForm() {
     }));
   };
 
+  // Final Save Recipe Function to save recipe to database
   const saveRecipe = () => {
     const recipeOils = oils.map((oil) => {
       const amount = parseInt(oil.amount, 10);
@@ -100,7 +103,6 @@ export default function TestRecipeForm() {
       water_amount: formInput.waterAmount,
       oilList: recipeOils,
     };
-    console.log(recipeObj);
     createRecipe(recipeObj).then(() => router.push('/'));
   };
 
@@ -108,7 +110,8 @@ export default function TestRecipeForm() {
     <>
       <div className={styles.recipeFormWrapper}>
         <div className="recipe-form-container">
-          <Form onSubmit={handleSubmitTotalOil}>
+          {/* Initial Form to add Total oil amount, water percentage, and super fat */}
+          <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Control
                 type="number"
@@ -136,6 +139,7 @@ export default function TestRecipeForm() {
               <Form.Text>Super Fat Percentage</Form.Text>
             </Form.Group>
           </Form>
+          {/* Form Select to add oils to recipe */}
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Select name="currentOil" id="currentOil">
@@ -149,6 +153,7 @@ export default function TestRecipeForm() {
           </Form>
         </div>
         <div className="oil-list-container">
+          {/* Form for each oil to add individual amounts */}
           <section>
             {oils?.length > 0
               ? (
@@ -176,6 +181,8 @@ export default function TestRecipeForm() {
         </div>
       </div>
       <hr />
+      {/* If there is a recipe calculated, show the results and a button to save the recipe
+      Form to add recipe title, description, notes, and public/private */}
       {formInput.waterAmount
         ? (
           <div className={styles.recipeFormWrapper}>
@@ -199,6 +206,7 @@ export default function TestRecipeForm() {
                   name="title"
                   value={formInput.title}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -221,7 +229,7 @@ export default function TestRecipeForm() {
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Check // prettier-ignore
+              <Form.Check
                 type="switch"
                 name="public"
                 label="Public?"
