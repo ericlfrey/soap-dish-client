@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import styles from './NewRecipeForm.module.css';
@@ -77,6 +77,20 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
     });
   };
 
+  const removeOil = (e) => {
+    // e.preventDefault();
+    console.log(e.target.value);
+    console.log('OIL Removed');
+    getSingleOil(e.target.value).then((selectedOil) => {
+      const oilExists = oils.some((oil) => oil.id === selectedOil.id || oil.oilId === selectedOil.id);
+      if (oilExists) {
+        const oilsCopy = [...oils];
+        oilsCopy.pop(selectedOil);
+        setOils(oilsCopy);
+      }
+    });
+  };
+
   // function to handle change of amount of each oil
   const handleAmountChange = (e) => {
     const { name, value } = e.target;
@@ -129,7 +143,6 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
         waterAmount: formInput.waterAmount,
         oilList: recipeOils,
       };
-      console.log('UPDATEE', payload);
       updateRecipe(payload).then(() => router.push(`/recipe/${payload.id}`));
     } else {
       const recipeOils = oils.map((oil) => {
@@ -147,7 +160,6 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
         water_amount: formInput.waterAmount,
         oilList: recipeOils,
       };
-      console.log('CREATE', payload);
       createRecipe(payload).then((recipe) => router.push(`/recipe/${recipe.id}`));
     }
   };
@@ -209,14 +221,17 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                     {oils?.map((oil) => (
                       <div key={oil.oilId}>
                         <h3 key={oil.oilId}>{oil.name}</h3>
-                        <Form.Control
-                          id={`oilAmount--${oil.oilId}`}
-                          name={oil.oilId}
-                          type="number"
-                          placeholder="Amount in ounces"
-                          onChange={handleAmountChange}
-                          {...oil.amount > 0 ? { value: Number(oil.amount) } : { value: '' }}
-                        />
+                        <InputGroup>
+                          <Form.Control
+                            id={`oilAmount--${oil.oilId}`}
+                            name={oil.oilId}
+                            type="number"
+                            placeholder="Amount in ounces"
+                            onChange={handleAmountChange}
+                            {...oil.amount > 0 ? { value: Number(oil.amount) } : { value: '' }}
+                          />
+                          <Button onClick={removeOil} value={oil.oilId}>-</Button>
+                        </InputGroup>
                       </div>
                     ))}
                     <Button variant="primary" type="submit">Calculate Recipe</Button>
