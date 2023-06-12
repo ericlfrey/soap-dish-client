@@ -282,6 +282,7 @@ UpdateRecipeForm.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     amount: PropTypes.string,
+    sap: PropTypes.string,
   })),
 };
 

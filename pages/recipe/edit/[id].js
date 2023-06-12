@@ -19,11 +19,11 @@ export default function EditRecipePage() {
     id: oil.id,
     name: oil.oil_name,
     amount: oil.amount,
+    sap: oil.oil.sap,
   }));
 
   return (
     <>
-      {/* {console.log(recipe)} */}
       <UpdateRecipeForm recipeObject={recipe} totalOil={totalOil} oilList={oilList} />
     </>
   );
