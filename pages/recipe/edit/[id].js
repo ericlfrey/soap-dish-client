@@ -15,12 +15,14 @@ export default function EditRecipePage() {
   }, [id, user.uid]);
 
   const totalOil = parseInt(recipe.recipe_oils?.reduce((a, b) => a + b.amount, 0), 10);
-  const oilList = recipe.recipe_oils?.map((oil) => ({
-    id: oil.id,
-    name: oil.oil_name,
-    amount: oil.amount,
-    sap: oil.oil.sap,
+  const oilList = recipe.recipe_oils?.map((recipeOil) => ({
+    id: recipeOil.id,
+    oilId: recipeOil.oil.id,
+    name: recipeOil.oil_name,
+    amount: recipeOil.amount,
+    sap: recipeOil.oil.sap,
   }));
+  console.log('OIL LIST', oilList);
 
   return (
     <>

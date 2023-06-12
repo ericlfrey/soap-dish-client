@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import styles from './NewRecipeForm.module.css';
 import { getOils, getSingleOil } from '../../utils/data/oilData';
 import { useAuth } from '../../utils/context/authContext';
-import { createRecipe } from '../../utils/data/recipeData';
+import { createRecipe, updateRecipe } from '../../utils/data/recipeData';
 
 const initialState = {
   totalOil: 32,
@@ -29,11 +29,11 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
 
   useEffect(() => {
     getOils().then(setAllOils);
-    console.log(formInput);
     if (recipeObject.id) {
       const waterPercentage = parseInt((recipeObject.water_amount / totalOil) * 100, 10);
       const waterAmount = recipeObject.water_amount;
       setFormInput({
+        id: recipeObject.id,
         totalOil,
         oilList,
         title: recipeObject.title,
@@ -67,7 +67,7 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
   const addOils = () => {
     const currentOil = document.getElementById('currentOil');
     getSingleOil(currentOil.value).then((selectedOil) => {
-      const oilExists = oils.some((oil) => oil.id === selectedOil.id);
+      const oilExists = oils.some((oil) => oil.id === selectedOil.id || oil.oilId === selectedOil.id);
       if (oilExists) {
         window.alert('Oil already in list');
       } else {
@@ -98,7 +98,6 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
     const lyeAmount = Number(oils.reduce((total, oil) => total
       + (oil.amount * oil.sap), 0)
       * (1 - superFat)).toFixed(3);
-    console.log('LYE AMOUNT', lyeAmount, 'WATER AMOUNT', waterAmount, 'SUPERFAT', superFat);
     setFormInput((prevState) => ({
       ...prevState,
       totalOil: oilTotal,
@@ -110,22 +109,50 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
 
   // Final Save Recipe Function to save recipe to database
   const saveRecipe = () => {
-    const recipeOils = oils.map((oil) => {
-      const amount = parseInt(oil.amount, 10);
-      return { oilId: oil.id, amount };
-    });
-    const recipeObj = {
-      uid: user.uid,
-      title: formInput.title,
-      description: formInput.description,
-      notes: formInput.notes,
-      public: formInput.public,
-      super_fat: formInput.superFat / 100,
-      lye_amount: formInput.lyeAmount,
-      water_amount: formInput.waterAmount,
-      oilList: recipeOils,
-    };
-    createRecipe(recipeObj).then((recipe) => router.push(`/recipe/${recipe.id}`));
+    // const recipeOils = oils.map((oil) => {
+    //   const amount = parseInt(oil.amount, 10);
+    //   return { oilId: oil.id, amount };
+    // });
+    if (recipeObject.id) {
+      const recipeOils = oils.map((oil) => {
+        const amount = parseInt(oil.amount, 10);
+        return { oilId: oil.id, amount };
+      });
+      console.log('Update This Shit');
+      console.log(formInput);
+      console.log(recipeOils);
+      const payload = {
+        id: formInput.id,
+        uid: user.uid,
+        title: formInput.title,
+        description: formInput.description,
+        notes: formInput.notes,
+        public: formInput.public,
+        superFat: formInput.superFat / 100,
+        lyeAmount: formInput.lyeAmount,
+        waterAmount: formInput.waterAmount,
+        oilList: recipeOils,
+      };
+      console.log('PAYLOAD', payload);
+      updateRecipe(payload).then(() => router.push(`/recipe/${payload.id}`));
+    } else {
+      const recipeOils = oils.map((oil) => {
+        const amount = parseInt(oil.amount, 10);
+        return { oilId: oil.id, amount };
+      });
+      const payload = {
+        uid: user.uid,
+        title: formInput.title,
+        description: formInput.description,
+        notes: formInput.notes,
+        public: formInput.public,
+        super_fat: formInput.superFat / 100,
+        lye_amount: formInput.lyeAmount,
+        water_amount: formInput.waterAmount,
+        oilList: recipeOils,
+      };
+      createRecipe(payload).then((recipe) => router.push(`/recipe/${recipe.id}`));
+    }
   };
 
   return (
@@ -280,6 +307,7 @@ UpdateRecipeForm.propTypes = {
   totalOil: PropTypes.number,
   oilList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
+    oilId: PropTypes.number,
     name: PropTypes.string,
     amount: PropTypes.string,
     sap: PropTypes.string,
