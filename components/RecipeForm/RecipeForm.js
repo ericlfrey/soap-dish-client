@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import styles from './NewRecipeForm.module.css';
+import styles from './RecipeForm.module.css';
 import { getOils, getSingleOil } from '../../utils/data/oilData';
 import { useAuth } from '../../utils/context/authContext';
 import { createRecipe, updateRecipe } from '../../utils/data/recipeData';
@@ -20,7 +20,7 @@ const initialState = {
   public: false,
 };
 
-export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
+export default function RecipeForm({ recipeObject, totalOil, oilList }) {
   const [formInput, setFormInput] = useState(initialState);
   const [oils, setOils] = useState([]);
   const [allOils, setAllOils] = useState([]);
@@ -73,6 +73,18 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
         };
         const updatedOils = [...oils, oilObj];
         setOils(updatedOils);
+      }
+    });
+  };
+
+  const removeOil = (e) => {
+    getSingleOil(e.target.value).then((selectedOil) => {
+      const oilExists = oils.some((oil) => oil.id === selectedOil.id || oil.oilId === selectedOil.id);
+      if (oilExists) {
+        const oilsCopy = [...oils];
+        const index = oilsCopy.findIndex((oil) => oil.id === selectedOil.id || oil.oilId === selectedOil.id);
+        oilsCopy.splice(index, 1);
+        setOils(oilsCopy);
       }
     });
   };
@@ -133,7 +145,7 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
     } else {
       const recipeOils = oils.map((oil) => {
         const amount = parseInt(oil.amount, 10);
-        return { oilId: oil.id, amount };
+        return { oilId: oil.oilId, amount };
       });
       const payload = {
         uid: user.uid,
@@ -207,14 +219,17 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
                     {oils?.map((oil) => (
                       <div key={oil.oilId}>
                         <h3 key={oil.oilId}>{oil.name}</h3>
-                        <Form.Control
-                          id={`oilAmount--${oil.oilId}`}
-                          name={oil.oilId}
-                          type="number"
-                          placeholder="Amount in ounces"
-                          onChange={handleAmountChange}
-                          {...oil.amount > 0 ? { value: Number(oil.amount) } : { value: '' }}
-                        />
+                        <InputGroup>
+                          <Form.Control
+                            id={`oilAmount--${oil.oilId}`}
+                            name={oil.oilId}
+                            type="number"
+                            placeholder="Amount in ounces"
+                            onChange={handleAmountChange}
+                            {...oil.amount > 0 ? { value: Number(oil.amount) } : { value: '' }}
+                          />
+                          <Button onClick={removeOil} value={oil.oilId}>-</Button>
+                        </InputGroup>
                       </div>
                     ))}
                     <Button variant="primary" type="submit">Calculate Recipe</Button>
@@ -278,7 +293,13 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
                 type="switch"
                 name="public"
                 label="Public?"
-                onChange={() => setFormInput((prevState) => ({ ...prevState, public: !prevState.public }))}
+                checked={formInput.public}
+                onChange={(e) => {
+                  setFormInput((prevState) => ({
+                    ...prevState,
+                    public: e.target.checked,
+                  }));
+                }}
               />
             </Form>
           </div>
@@ -288,7 +309,7 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
   );
 }
 
-UpdateRecipeForm.propTypes = {
+RecipeForm.propTypes = {
   recipeObject: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
@@ -309,7 +330,7 @@ UpdateRecipeForm.propTypes = {
   })),
 };
 
-UpdateRecipeForm.defaultProps = {
+RecipeForm.defaultProps = {
   recipeObject: { initialState },
   totalOil: initialState.totalOil,
   // eslint-disable-next-line react/default-props-match-prop-types

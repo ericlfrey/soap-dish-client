@@ -1,7 +1,5 @@
 import React from 'react';
-import RecipeForm from '../../components/NewRecipeForm/RecipeForm';
-// import NewRecipeForm from '../../components/NewRecipeForm/NewRecipeForm';
-// import TestRecipeForm from '../../components/NewRecipeForm/TestRecipeForm';
+import RecipeForm from '../../components/RecipeForm/RecipeForm';
 
 export default function CreateRecipePage() {
   return (
