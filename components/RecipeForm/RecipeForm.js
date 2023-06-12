@@ -1,23 +1,26 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 import { useRouter } from 'next/router';
-import styles from './NewRecipeForm.module.css';
+import PropTypes from 'prop-types';
+import styles from './RecipeForm.module.css';
 import { getOils, getSingleOil } from '../../utils/data/oilData';
 import { useAuth } from '../../utils/context/authContext';
-import { createRecipe } from '../../utils/data/recipeData';
+import { createRecipe, updateRecipe } from '../../utils/data/recipeData';
 
-export default function TestRecipeForm() {
-  const initialState = {
-    totalOil: 32,
-    oilList: [],
-    title: '',
-    waterPercentage: 33,
-    lyeAmount: 0,
-    superFat: 5,
-    description: '',
-    notes: '',
-    public: false,
-  };
+const initialState = {
+  totalOil: 32,
+  oilList: [],
+  title: '',
+  waterPercentage: 33,
+  lyeAmount: 0,
+  superFat: 5,
+  description: '',
+  notes: '',
+  public: false,
+};
+
+export default function RecipeForm({ recipeObject, totalOil, oilList }) {
   const [formInput, setFormInput] = useState(initialState);
   const [oils, setOils] = useState([]);
   const [allOils, setAllOils] = useState([]);
@@ -26,7 +29,25 @@ export default function TestRecipeForm() {
 
   useEffect(() => {
     getOils().then(setAllOils);
-  }, []);
+    if (recipeObject.id) {
+      const waterPercentage = parseInt((recipeObject.water_amount / totalOil) * 100, 10);
+      const waterAmount = recipeObject.water_amount;
+      setFormInput({
+        id: recipeObject.id,
+        totalOil,
+        oilList,
+        title: recipeObject.title,
+        waterPercentage,
+        waterAmount,
+        lyeAmount: Number(recipeObject.lye_amount),
+        superFat: Number(recipeObject.super_fat * 100),
+        description: recipeObject.description,
+        notes: recipeObject.notes,
+        public: recipeObject.public,
+      });
+      setOils(oilList);
+    }
+  }, [recipeObject]);
 
   // function to look for state change of inputs
   const handleChange = (e) => {
@@ -37,21 +58,33 @@ export default function TestRecipeForm() {
     }));
   };
 
-  // function to handle submit of total oil
-  // const handleSubmitTotalOil = (e) => {
-  //   e.preventDefault();
-  // };
-
   // Get oil from select and add to oils array.
   const addOils = () => {
     const currentOil = document.getElementById('currentOil');
     getSingleOil(currentOil.value).then((selectedOil) => {
-      const oilExists = oils.some((oil) => oil.id === selectedOil.id);
+      const oilExists = oils.some((oil) => oil.id === selectedOil.id || oil.oilId === selectedOil.id);
       if (oilExists) {
         window.alert('Oil already in list');
       } else {
-        const updatedOils = [...oils, selectedOil];
+        const oilObj = {
+          oilId: selectedOil.id,
+          name: selectedOil.name,
+          sap: selectedOil.sap,
+        };
+        const updatedOils = [...oils, oilObj];
         setOils(updatedOils);
+      }
+    });
+  };
+
+  const removeOil = (e) => {
+    getSingleOil(e.target.value).then((selectedOil) => {
+      const oilExists = oils.some((oil) => oil.id === selectedOil.id || oil.oilId === selectedOil.id);
+      if (oilExists) {
+        const oilsCopy = [...oils];
+        const index = oilsCopy.findIndex((oil) => oil.id === selectedOil.id || oil.oilId === selectedOil.id);
+        oilsCopy.splice(index, 1);
+        setOils(oilsCopy);
       }
     });
   };
@@ -60,15 +93,15 @@ export default function TestRecipeForm() {
   const handleAmountChange = (e) => {
     const { name, value } = e.target;
     const oilId = parseInt(name, 10);
-    const updatedOils = oils.map((oil) => (oil.id === oilId ? { ...oil, amount: value } : oil));
+    const updatedOils = oils.map((oil) => (oil.oilId === oilId ? { ...oil, amount: value } : oil));
     setOils(updatedOils);
   };
 
   // function to calculate recipe
   const calculateRecipe = (e) => {
     e.preventDefault();
-    const totalOil = oils.reduce((a, b) => a + Number(b.amount), 0);
-    if (totalOil !== Number(formInput.totalOil)) {
+    const oilTotal = oils.reduce((a, b) => a + Number(b.amount), 0);
+    if (oilTotal !== Number(formInput.totalOil)) {
       window.alert('Total oil amount does not match');
       return;
     }
@@ -79,7 +112,7 @@ export default function TestRecipeForm() {
       * (1 - superFat)).toFixed(3);
     setFormInput((prevState) => ({
       ...prevState,
-      totalOil,
+      totalOil: oilTotal,
       oilList: oils,
       lyeAmount,
       waterAmount,
@@ -88,22 +121,45 @@ export default function TestRecipeForm() {
 
   // Final Save Recipe Function to save recipe to database
   const saveRecipe = () => {
-    const recipeOils = oils.map((oil) => {
-      const amount = parseInt(oil.amount, 10);
-      return { oilId: oil.id, amount };
-    });
-    const recipeObj = {
-      uid: user.uid,
-      title: formInput.title,
-      description: formInput.description,
-      notes: formInput.notes,
-      public: formInput.public,
-      super_fat: formInput.superFat / 100,
-      lye_amount: formInput.lyeAmount,
-      water_amount: formInput.waterAmount,
-      oilList: recipeOils,
-    };
-    createRecipe(recipeObj).then((recipe) => router.push(`/recipe/${recipe.id}`));
+    if (recipeObject.id) {
+      const recipeOils = oils.map((oil) => {
+        const amount = parseInt(oil.amount, 10);
+        if (oil.id) {
+          return { id: oil.id, oilId: oil.oilId, amount };
+        }
+        return { oilId: oil.oilId, amount };
+      });
+      const payload = {
+        id: formInput.id,
+        uid: user.uid,
+        title: formInput.title,
+        description: formInput.description,
+        notes: formInput.notes,
+        public: formInput.public,
+        superFat: formInput.superFat / 100,
+        lyeAmount: formInput.lyeAmount,
+        waterAmount: formInput.waterAmount,
+        oilList: recipeOils,
+      };
+      updateRecipe(payload).then(() => router.push(`/recipe/${payload.id}`));
+    } else {
+      const recipeOils = oils.map((oil) => {
+        const amount = parseInt(oil.amount, 10);
+        return { oilId: oil.oilId, amount };
+      });
+      const payload = {
+        uid: user.uid,
+        title: formInput.title,
+        description: formInput.description,
+        notes: formInput.notes,
+        public: formInput.public,
+        super_fat: formInput.superFat / 100,
+        lye_amount: formInput.lyeAmount,
+        water_amount: formInput.waterAmount,
+        oilList: recipeOils,
+      };
+      createRecipe(payload).then((recipe) => router.push(`/recipe/${recipe.id}`));
+    }
   };
 
   return (
@@ -161,15 +217,19 @@ export default function TestRecipeForm() {
                   <h3>Oils:</h3>
                   <Form onSubmit={calculateRecipe}>
                     {oils?.map((oil) => (
-                      <div key={oil.id}>
-                        <h3 key={oil.id}>{oil.name}</h3>
-                        <Form.Control
-                          id={`oilAmount--${oil.id}`}
-                          name={oil.id}
-                          type="number"
-                          placeholder="Amount in ounces"
-                          onChange={handleAmountChange}
-                        />
+                      <div key={oil.oilId}>
+                        <h3 key={oil.oilId}>{oil.name}</h3>
+                        <InputGroup>
+                          <Form.Control
+                            id={`oilAmount--${oil.oilId}`}
+                            name={oil.oilId}
+                            type="number"
+                            placeholder="Amount in ounces"
+                            onChange={handleAmountChange}
+                            {...oil.amount > 0 ? { value: Number(oil.amount) } : { value: '' }}
+                          />
+                          <Button onClick={removeOil} value={oil.oilId}>-</Button>
+                        </InputGroup>
                       </div>
                     ))}
                     <Button variant="primary" type="submit">Calculate Recipe</Button>
@@ -190,7 +250,7 @@ export default function TestRecipeForm() {
               <h3>Recipe Results:</h3>
               <section>
                 {formInput.oilList.map((oil) => (
-                  <p key={oil.id}>{`${oil.name}: ${oil.amount} oz.`}</p>
+                  <p key={oil.oilId}>{`${oil.name}: ${oil.amount} oz.`}</p>
                 ))}
                 <p>Lye Amount:{` ${formInput.lyeAmount} oz.`}</p>
                 <p>Water Amount:{` ${formInput.waterAmount} oz.`}</p>
@@ -233,7 +293,13 @@ export default function TestRecipeForm() {
                 type="switch"
                 name="public"
                 label="Public?"
-                onChange={() => setFormInput((prevState) => ({ ...prevState, public: !prevState.public }))}
+                checked={formInput.public}
+                onChange={(e) => {
+                  setFormInput((prevState) => ({
+                    ...prevState,
+                    public: e.target.checked,
+                  }));
+                }}
               />
             </Form>
           </div>
@@ -242,3 +308,31 @@ export default function TestRecipeForm() {
     </>
   );
 }
+
+RecipeForm.propTypes = {
+  recipeObject: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    notes: PropTypes.string,
+    public: PropTypes.bool,
+    super_fat: PropTypes.string,
+    lye_amount: PropTypes.string,
+    water_amount: PropTypes.string,
+  }),
+  totalOil: PropTypes.number,
+  oilList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    oilId: PropTypes.number,
+    name: PropTypes.string,
+    amount: PropTypes.string,
+    sap: PropTypes.string,
+  })),
+};
+
+RecipeForm.defaultProps = {
+  recipeObject: { initialState },
+  totalOil: initialState.totalOil,
+  // eslint-disable-next-line react/default-props-match-prop-types
+  oilList: initialState.oilList,
+};

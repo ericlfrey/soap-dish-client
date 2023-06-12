@@ -10,7 +10,6 @@ export default function NavBar() {
       <div className={`container-fluid ${styles.navContainer}`}>
         <Link passHref href="/">
           <a className={`navbar-brand ${styles.navbarBrand}`}>
-            {/* <Image src={logo} height={60} width={60} className={styles.logo} /> */}
             🧼 The Soap Dish
           </a>
         </Link>
@@ -37,9 +36,6 @@ export default function NavBar() {
               </li>
             </div>
             <ProfileDrawer />
-            {/* <button type="button" className={styles.signOutBtn} onClick={signOut}>
-              Sign Out
-            </button> */}
           </ul>
         </div>
       </div>

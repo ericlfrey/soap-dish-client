@@ -1,12 +1,11 @@
 import React from 'react';
-// import NewRecipeForm from '../../components/NewRecipeForm/NewRecipeForm';
-import TestRecipeForm from '../../components/NewRecipeForm/TestRecipeForm';
+import RecipeForm from '../../components/RecipeForm/RecipeForm';
 
 export default function CreateRecipePage() {
   return (
     <>
       <h1>Create New Recipe</h1>
-      <TestRecipeForm />
+      <RecipeForm />
     </>
   );
 }
