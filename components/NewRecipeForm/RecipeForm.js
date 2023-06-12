@@ -78,14 +78,12 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
   };
 
   const removeOil = (e) => {
-    // e.preventDefault();
-    console.log(e.target.value);
-    console.log('OIL Removed');
     getSingleOil(e.target.value).then((selectedOil) => {
       const oilExists = oils.some((oil) => oil.id === selectedOil.id || oil.oilId === selectedOil.id);
       if (oilExists) {
         const oilsCopy = [...oils];
-        oilsCopy.pop(selectedOil);
+        const index = oilsCopy.findIndex((oil) => oil.id === selectedOil.id || oil.oilId === selectedOil.id);
+        oilsCopy.splice(index, 1);
         setOils(oilsCopy);
       }
     });
