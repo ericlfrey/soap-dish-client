@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './NavBar.module.css';
 import ProfileDrawer from '../ProfileDrawer/ProfileDrawer';
+import logoBlue from '../../public/images/logo_blue.png';
 
 export default function NavBar() {
   return (
@@ -10,7 +12,8 @@ export default function NavBar() {
       <div className={`container-fluid ${styles.navContainer}`}>
         <Link passHref href="/">
           <a className={`navbar-brand ${styles.navbarBrand}`}>
-            🧼 The Soap Dish
+            <Image src={logoBlue} height={60} width={60} className={styles.logo} />
+            {/* 🧼 The Soap Dish */}
           </a>
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">

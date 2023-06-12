@@ -26,3 +26,24 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.signin-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.signin_btn {
+  background-color: #1D2D44;
+  color: #F0EBD8;
+  border: none;
+}
+
+.signin_btn:hover,
+.signin_btn:focus-visible,
+div .signin_btn:active,
+#signinBtn:active {
+  background-color: #3E5C76;
+  box-shadow: none;
+}
