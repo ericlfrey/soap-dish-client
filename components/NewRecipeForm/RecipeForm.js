@@ -280,7 +280,13 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                 type="switch"
                 name="public"
                 label="Public?"
-                onChange={() => setFormInput((prevState) => ({ ...prevState, public: !prevState.public }))}
+                checked={formInput.public}
+                onChange={(e) => {
+                  setFormInput((prevState) => ({
+                    ...prevState,
+                    public: e.target.checked,
+                  }));
+                }}
               />
             </Form>
           </div>
