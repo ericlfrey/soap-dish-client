@@ -15,7 +15,7 @@ export default function EditRecipePage() {
     getSingleRecipe(id, user.uid).then(setRecipe);
   }, [id, user.uid]);
 
-  const totalOil = parseInt(recipe.recipe_oils?.reduce((a, b) => a + b.amount, 0), 10);
+  const totalOil = parseInt(recipe.recipe_oils?.reduce((a, b) => a + Number(b.amount), 0), 10);
   const oilList = recipe.recipe_oils?.map((recipeOil) => ({
     id: recipeOil.id,
     oilId: recipeOil.oil.id,
