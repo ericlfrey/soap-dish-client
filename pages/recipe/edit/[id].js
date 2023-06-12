@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import UpdateRecipeForm from '../../../components/NewRecipeForm/UpdateRecipeForm';
+// import UpdateRecipeForm from '../../../components/NewRecipeForm/UpdateRecipeForm';
 import { getSingleRecipe } from '../../../utils/data/recipeData';
 import { useAuth } from '../../../utils/context/authContext';
+import RecipeForm from '../../../components/NewRecipeForm/RecipeForm';
 
 export default function EditRecipePage() {
   const [recipe, setRecipe] = useState({});
@@ -22,11 +23,10 @@ export default function EditRecipePage() {
     amount: recipeOil.amount,
     sap: recipeOil.oil.sap,
   }));
-  console.log('OIL LIST', oilList);
 
   return (
     <>
-      <UpdateRecipeForm recipeObject={recipe} totalOil={totalOil} oilList={oilList} />
+      <RecipeForm recipeObject={recipe} totalOil={totalOil} oilList={oilList} />
     </>
   );
 }

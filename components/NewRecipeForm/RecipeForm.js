@@ -20,7 +20,7 @@ const initialState = {
   public: false,
 };
 
-export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
+export default function RecipeForm({ recipeObject, totalOil, oilList }) {
   const [formInput, setFormInput] = useState(initialState);
   const [oils, setOils] = useState([]);
   const [allOils, setAllOils] = useState([]);
@@ -129,11 +129,12 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
         waterAmount: formInput.waterAmount,
         oilList: recipeOils,
       };
+      console.log('UPDATEE', payload);
       updateRecipe(payload).then(() => router.push(`/recipe/${payload.id}`));
     } else {
       const recipeOils = oils.map((oil) => {
         const amount = parseInt(oil.amount, 10);
-        return { oilId: oil.id, amount };
+        return { oilId: oil.oilId, amount };
       });
       const payload = {
         uid: user.uid,
@@ -146,6 +147,7 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
         water_amount: formInput.waterAmount,
         oilList: recipeOils,
       };
+      console.log('CREATE', payload);
       createRecipe(payload).then((recipe) => router.push(`/recipe/${recipe.id}`));
     }
   };
@@ -288,7 +290,7 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
   );
 }
 
-UpdateRecipeForm.propTypes = {
+RecipeForm.propTypes = {
   recipeObject: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
@@ -309,7 +311,7 @@ UpdateRecipeForm.propTypes = {
   })),
 };
 
-UpdateRecipeForm.defaultProps = {
+RecipeForm.defaultProps = {
   recipeObject: { initialState },
   totalOil: initialState.totalOil,
   // eslint-disable-next-line react/default-props-match-prop-types
