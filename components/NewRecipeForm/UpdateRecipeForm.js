@@ -67,11 +67,17 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
   const addOils = () => {
     const currentOil = document.getElementById('currentOil');
     getSingleOil(currentOil.value).then((selectedOil) => {
+      console.log('SELECTED OIL', selectedOil);
       const oilExists = oils.some((oil) => oil.id === selectedOil.id || oil.oilId === selectedOil.id);
       if (oilExists) {
         window.alert('Oil already in list');
       } else {
-        const updatedOils = [...oils, selectedOil];
+        const oilObj = {
+          oilId: selectedOil.id,
+          name: selectedOil.name,
+          sap: selectedOil.sap,
+        };
+        const updatedOils = [...oils, oilObj];
         setOils(updatedOils);
       }
     });
@@ -81,7 +87,7 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
   const handleAmountChange = (e) => {
     const { name, value } = e.target;
     const oilId = parseInt(name, 10);
-    const updatedOils = oils.map((oil) => (oil.id === oilId ? { ...oil, amount: value } : oil));
+    const updatedOils = oils.map((oil) => (oil.oilId === oilId ? { ...oil, amount: value } : oil));
     setOils(updatedOils);
   };
 
@@ -116,7 +122,10 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
     if (recipeObject.id) {
       const recipeOils = oils.map((oil) => {
         const amount = parseInt(oil.amount, 10);
-        return { oilId: oil.id, amount };
+        if (oil.id) {
+          return { id: oil.id, oilId: oil.oilId, amount };
+        }
+        return { oilId: oil.oilId, amount };
       });
       console.log('Update This Shit');
       console.log(formInput);
@@ -210,11 +219,11 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
                   <h3>Oils:</h3>
                   <Form onSubmit={calculateRecipe}>
                     {oils?.map((oil) => (
-                      <div key={oil.id}>
-                        <h3 key={oil.id}>{oil.name}</h3>
+                      <div key={oil.oilId}>
+                        <h3 key={oil.oilId}>{oil.name}</h3>
                         <Form.Control
-                          id={`oilAmount--${oil.id}`}
-                          name={oil.id}
+                          id={`oilAmount--${oil.oilId}`}
+                          name={oil.oilId}
                           type="number"
                           placeholder="Amount in ounces"
                           onChange={handleAmountChange}
@@ -240,7 +249,7 @@ export default function UpdateRecipeForm({ recipeObject, totalOil, oilList }) {
               <h3>Recipe Results:</h3>
               <section>
                 {formInput.oilList.map((oil) => (
-                  <p key={oil.id}>{`${oil.name}: ${oil.amount} oz.`}</p>
+                  <p key={oil.oilId}>{`${oil.name}: ${oil.amount} oz.`}</p>
                 ))}
                 <p>Lye Amount:{` ${formInput.lyeAmount} oz.`}</p>
                 <p>Water Amount:{` ${formInput.waterAmount} oz.`}</p>
