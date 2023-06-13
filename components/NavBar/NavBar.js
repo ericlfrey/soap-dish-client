@@ -23,7 +23,7 @@ export default function NavBar() {
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul className={`navbar-nav me-auto ${styles.navbarNav}`}>
             <div className={`nav-links ${styles.navLinks}`}>
-              <li className={`nav-item ${styles.navItem}`}>
+              {/* <li className={`nav-item ${styles.navItem}`}>
                 <Link passHref href="/">
                   <a className={`${styles.navLink} nav-link`}>
                     Home
@@ -36,7 +36,7 @@ export default function NavBar() {
                     Add New Recipe
                   </a>
                 </Link>
-              </li>
+              </li> */}
             </div>
             <ProfileDrawer />
           </ul>

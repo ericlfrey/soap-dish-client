@@ -1,5 +1,13 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 
+:root {
+  --dark-blue: #0D1321;
+  --navy: #1D2D44;
+  --teal: #3E5C76;
+  --light-blue: #748CAB;
+  --linen: #F0EBD8;
+}
+
 html,
 body {
   padding: 0;
@@ -15,10 +23,11 @@ a {
 
 * {
   box-sizing: border-box;
+  color: var(--dark-blue);
 }
 
 body {
-  background-color: #F0EBD8;
+  background-color: var(--linen);
 }
 
 .recipeCardsDiv {
@@ -35,8 +44,8 @@ body {
 }
 
 .signin_btn {
-  background-color: #1D2D44;
-  color: #F0EBD8;
+  background-color: var(--navy);
+  color: var(--linen);
   border: none;
 }
 
@@ -44,6 +53,6 @@ body {
 .signin_btn:focus-visible,
 div .signin_btn:active,
 #signinBtn:active {
-  background-color: #3E5C76;
+  background-color: var(--teal);
   box-shadow: none;
 }
