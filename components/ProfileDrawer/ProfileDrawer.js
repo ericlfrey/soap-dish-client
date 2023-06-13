@@ -25,11 +25,11 @@ export default function ProfileDrawer() {
         onClick={handleShow}
       />
 
-      <Offcanvas show={show} onHide={handleClose} placement="end">
+      <Offcanvas show={show} onHide={handleClose} placement="end" className={styles.offCanvas}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Profile</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body className={styles.offCanvas}>
           <ul>
             <li className={styles.listItem} onClick={handleClose}>
               <Link href="/">

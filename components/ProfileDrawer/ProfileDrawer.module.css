@@ -1,3 +1,7 @@
+.offCanvas {
+  background-color: var(--linen);
+}
+
 .profileBtn {
   all: unset;
   color: #0D1321;
