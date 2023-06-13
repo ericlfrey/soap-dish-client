@@ -1,0 +1,27 @@
+.card {
+  width: 18rem;
+  height: 15rem;
+  margin: 1rem;
+  cursor: pointer;
+}
+
+.cardHeader {
+  background-color: var(--teal);
+  color: var(--linen)
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--light-blue);
+}
+
+.cardFooter {
+  background-color: var(--light-blue);
+  border: none
+}
+
+.cardLinks {
+  margin-top: auto;
+}

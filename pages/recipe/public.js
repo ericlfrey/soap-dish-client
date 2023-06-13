@@ -15,7 +15,7 @@ export default function PublicViewPage() {
 
   return (
     <>
-      <h1>PublicViewPage</h1>
+      <h1>Public Recipes</h1>
       <div className="recipeCardsDiv">
         {publicRecipes.map((recipe) => (
           <RecipeCard

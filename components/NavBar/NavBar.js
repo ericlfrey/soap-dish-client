@@ -13,9 +13,9 @@ export default function NavBar() {
       <Container fluid>
         <Navbar.Brand href="#">
           <Link passHref href="/">
-            <a className={`navbar-brand ${styles.navbarBrand}`}>
+            <div className={`navbar-brand ${styles.navbarBrand}`}>
               <Image src={logoBlue} height={60} width={60} className={styles.logo} />
-            </a>
+            </div>
           </Link>
         </Navbar.Brand>
         <section>
