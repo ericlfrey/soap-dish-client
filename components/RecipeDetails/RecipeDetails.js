@@ -1,7 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Heart, HeartFill } from 'react-bootstrap-icons';
+
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -40,10 +43,10 @@ export default function RecipeDetails({ id }) {
     <>
       <Card className={styles.card}>
         <Card.Body>
-          <section>
-            <Button variant="secondary" size="sm" onClick={handleFavorite}>
-              {recipe.is_favorite ? 'Unfavorite' : 'Favorite'}
-            </Button>
+          <section className={styles.favoriteDiv}>
+            <button type="button" className={styles.favoriteBtn} onClick={handleFavorite}>
+              {recipe.is_favorite ? <HeartFill className={styles.heartFill} /> : <Heart className={styles.heart} />}
+            </button>
           </section>
           <Card.Title>{recipe.title}</Card.Title>
           {recipe.recipe_oils?.map((oil) => (
