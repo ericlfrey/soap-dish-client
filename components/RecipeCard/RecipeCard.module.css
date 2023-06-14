@@ -4,6 +4,7 @@
   margin: 1rem;
   cursor: pointer;
   border: none;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .cardHeader {
