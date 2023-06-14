@@ -170,6 +170,7 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Control
+                className={styles.formInputField}
                 type="number"
                 placeholder="Enter total weight of oil in ounces"
                 name="totalOil"
@@ -178,6 +179,7 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
               />
               <Form.Text>Enter total weight of oils in ounces</Form.Text>
               <Form.Control
+                className={styles.formInputField}
                 type="number"
                 placeholder="Water as a percent of oils"
                 name="waterPercentage"
@@ -186,6 +188,7 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
               />
               <Form.Text>Water as a percent of oils</Form.Text>
               <Form.Control
+                className={styles.formInputField}
                 type="number"
                 placeholder="Super Fat Percentage"
                 name="superFat"
@@ -198,12 +201,12 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
           {/* Form Select to add oils to recipe */}
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Select name="currentOil" id="currentOil">
+              <Form.Select name="currentOil" id="currentOil" className={styles.formInputField}>
                 {allOils.map((oil) => <option key={oil.id} value={oil.id}>{oil.name}</option>)}
               </Form.Select>
               <Form.Text>Select an Oil to add</Form.Text>
             </Form.Group>
-            <Button variant="primary" type="button" onClick={addOils}>
+            <Button type="button" onClick={addOils}>
               Add Oil
             </Button>
           </Form>
@@ -221,6 +224,7 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                         <h3 key={oil.oilId}>{oil.name}</h3>
                         <InputGroup>
                           <Form.Control
+                            className={styles.formInputField}
                             id={`oilAmount--${oil.oilId}`}
                             name={oil.oilId}
                             type="number"
@@ -261,6 +265,7 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Title</Form.Label>
                 <Form.Control
+                  className={styles.formInputField}
                   type="textarea"
                   placeholder="Recipe Title"
                   name="title"
@@ -273,6 +278,7 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                 <Form.Label>Description</Form.Label>
                 <Form.Control
                   as="textarea"
+                  className={styles.formInputField}
                   rows={3}
                   name="description"
                   value={formInput.description}
@@ -283,6 +289,7 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                 <Form.Label>Notes</Form.Label>
                 <Form.Control
                   as="textarea"
+                  className={styles.formInputField}
                   rows={3}
                   name="notes"
                   value={formInput.notes}
@@ -290,6 +297,8 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                 />
               </Form.Group>
               <Form.Check
+                id="formCheck"
+                className={styles.formCheck}
                 type="switch"
                 name="public"
                 label="Public?"

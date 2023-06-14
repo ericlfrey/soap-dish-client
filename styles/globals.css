@@ -2,10 +2,10 @@
 
 :root {
   --dark-blue: #0D1321;
-  --navy: #1D2D44;
+  --navy: rgb(29, 45, 68);
   --teal: #3E5C76;
   --light-blue: #748CAB;
-  --linen: #F0EBD8;
+  --linen: rgb(240, 235, 216);
 }
 
 html,
@@ -46,16 +46,42 @@ body {
   margin-top: 100px;
 }
 
-.signin_btn {
+.btn {
   background-color: var(--navy);
   color: var(--linen);
   border: none;
 }
 
-.signin_btn:hover,
-.signin_btn:focus-visible,
-div .signin_btn:active,
-#signinBtn:active {
+.btn:hover,
+.btn:focus-visible,
+.btn:active,
+#signinBtn:active,
+.btn-check:checked+.btn,
+:not(.btn-check)+.btn:active,
+.btn:first-child:active,
+.btn.active,
+.btn.show {
   background-color: var(--teal);
   box-shadow: none;
+}
+
+/* Styles for the form checks- could not get them in the module */
+.form-check-input,
+#formCheck {
+  background-color: var(--linen);
+  border-color: var(--navy);
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(29, 45, 68,0.9)'/></svg>");
+}
+
+.form-check-input:checked,
+.form-check-input:focus,
+.form-check-input:focus-visible,
+#formCheck:checked,
+#formCheck:focus,
+#formCheck:focus-visible {
+  background-color: var(--navy);
+  border-color: var(--navy);
+  box-shadow: none;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(240, 235, 216,0.9)'/></svg>");
+  /* i want the color of the switch to change */
 }
