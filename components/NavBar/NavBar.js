@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Container, Navbar } from 'react-bootstrap';
 import styles from './NavBar.module.css';
 import ProfileDrawer from '../ProfileDrawer/ProfileDrawer';
-import logoBlue from '../../public/images/logo_blue.png';
+import logoBeige from '../../public/images/logo_beige.png';
 
 export default function NavBar() {
   return (
@@ -14,13 +14,13 @@ export default function NavBar() {
         <Navbar.Brand href="#">
           <Link passHref href="/">
             <div className={`navbar-brand ${styles.navbarBrand}`}>
-              <Image src={logoBlue} height={60} width={60} className={styles.logo} />
+              <Image src={logoBeige} height={60} width={60} className={styles.logo} />
             </div>
           </Link>
         </Navbar.Brand>
-        <section>
+        <h1 className={styles.navHeading}>
           The Soap Dish
-        </section>
+        </h1>
         <ProfileDrawer />
       </Container>
     </Navbar>

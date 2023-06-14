@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #748CAB;
+  background-color: var(--teal);
   overflow: hidden;
   position: sticky;
   top: 0;
@@ -20,6 +20,10 @@
   display: flex;
   justify-content: space-between;
   margin-left: 20px;
+}
+
+.navHeading {
+  color: var(--linen);
 }
 
 .navLinks {
