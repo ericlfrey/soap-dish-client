@@ -4,29 +4,49 @@
   justify-content: space-between;
 }
 
-/* .formContainer {
+.formGroup {
   display: flex;
-  justify-content: center;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  margin-top: 30px;
-  width: 50%;
-} */
+.formInputFieldTop {
+  background-color: var(--linen);
+  width: 5rem;
+  margin: 0 1rem 1rem 0
+}
+
+.oilSelect {
+  background-color: var(--linen);
+  font-size: 0.8rem;
+}
+
+.oilSelect:focus {
+  background-color: var(--linen);
+  box-shadow: none;
+}
+
+.oilSelectGrp {
+  width: 15rem;
+  margin: 0 1rem 1rem 0
+}
 
 .formInputField {
   background-color: var(--linen);
-  /* border: solid 1px var(--dark-green);
-  color: var(--dark-green); */
 }
 
 .formInputField:focus {
   background-color: var(--linen);
   box-shadow: none;
-  /* border: solid 1px var(--dark-green);
-  color: var(--dark-green); */
+}
+
+.oilInput {
+  background-color: var(--linen);
+  width: 5rem;
+  margin: 0 1rem 1rem 0
+}
+
+.oilInput:focus {
+  background-color: var(--linen);
+  box-shadow: none;
 }
 
 .formBtn {
@@ -41,4 +61,16 @@
 .formBtn:active {
   background-color: var(--light-green);
   border: solid 1px var(--dark-green);
+}
+
+.sectionHeader {
+  margin-bottom: 1.5rem;
+}
+
+.singleOil {
+  display: flex;
+}
+
+.oilNameBtn {
+  display: flex;
 }

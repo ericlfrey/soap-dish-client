@@ -32,6 +32,10 @@ body {
   background-color: var(--light-blue);
 }
 
+/* .nav {
+  z-index: 1;
+} */
+
 .recipeCardsDiv {
   display: flex;
   flex-wrap: wrap;
@@ -84,4 +88,9 @@ body {
   box-shadow: none;
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(240, 235, 216,0.9)'/></svg>");
   /* i want the color of the switch to change */
+}
+
+/* Bootstrap sets this to z index of 2 for some reason, and it was appearing over the NavBar */
+.input-group .btn {
+  z-index: 0;
 }
