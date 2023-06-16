@@ -55,8 +55,10 @@ export default function RecipeDetails({ id }) {
           <Card.Text>Water: {recipe.water_amount} oz</Card.Text>
           <Card.Text>Lye: {recipe.lye_amount} oz</Card.Text>
           <Card.Text>Super fat: {recipe.super_fat * 100}%</Card.Text>
-          <Card.Text>Description: {recipe.description}</Card.Text>
-          <Card.Text>Notes: {recipe.notes}</Card.Text>
+          <Card.Text>Description:</Card.Text>
+          <Card.Text>{recipe.description}</Card.Text>
+          <Card.Text>Notes:</Card.Text>
+          <Card.Text>{recipe.notes}</Card.Text>
           <Card.Text>{recipe.public ? 'Public' : 'Private'}</Card.Text>
           {user.uid === recipe.maker?.uid
             ? (

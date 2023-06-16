@@ -32,13 +32,6 @@ body {
   background-color: var(--light-blue);
 }
 
-.recipeCardsDiv {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 150px;
-}
-
 .signin-div {
   display: flex;
   flex-direction: column;

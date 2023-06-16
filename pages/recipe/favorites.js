@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { getFavoriteRecipes } from '../../utils/data/recipeData';
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import { useAuth } from '../../utils/context/authContext';
+import styles from '../../styles/PagesStyles.module.css';
 
 export default function FavoritesViewPage() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -18,8 +19,8 @@ export default function FavoritesViewPage() {
 
   return (
     <>
-      <h1>User Favorites</h1>
-      <div className="recipeCardsDiv">
+      <h1 className={styles.pageHeading}>Favorites</h1>
+      <div className={styles.recipeCardsDiv}>
         {favoriteRecipes.map((recipe) => (
           <RecipeCard
             key={recipe.id}

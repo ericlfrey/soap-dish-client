@@ -1,5 +1,5 @@
 .card {
-  /* width: 90%; */
+  margin: 1rem 0 2rem 0;
   background-color: var(--linen);
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }

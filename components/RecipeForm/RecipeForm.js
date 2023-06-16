@@ -235,7 +235,7 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                     {oils?.map((oil) => (
                       <section key={oil.oilId}>
                         <div className={styles.oilNameBtn}>
-                          <h4 key={oil.oilId} className={styles.oilName}>{`${oils.indexOf(oil) + 1}. ${oil.name}`}</h4>
+                          <h5 key={oil.oilId} className={styles.oilName}>{`${oils.indexOf(oil) + 1}. ${oil.name}`}</h5>
                           <Button onClick={removeOil} value={oil.oilId} className={styles.removeOilBtn}>remove</Button>
                         </div>
                         <Form.Group className={styles.singleOil}>

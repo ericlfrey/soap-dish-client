@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getPublicRecipes } from '../../utils/data/recipeData';
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
+import styles from '../../styles/PagesStyles.module.css';
 
 export default function PublicViewPage() {
   const [publicRecipes, setPublicRecipes] = useState([]);
@@ -15,8 +16,8 @@ export default function PublicViewPage() {
 
   return (
     <>
-      <h1>Public Recipes</h1>
-      <div className="recipeCardsDiv">
+      <h1 className={styles.pageHeading}>Public Recipes</h1>
+      <div className={styles.recipeCardsDiv}>
         {publicRecipes.map((recipe) => (
           <RecipeCard
             key={recipe.id}
