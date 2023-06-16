@@ -32,10 +32,6 @@ body {
   background-color: var(--light-blue);
 }
 
-/* .nav {
-  z-index: 1;
-} */
-
 .recipeCardsDiv {
   display: flex;
   flex-wrap: wrap;
@@ -91,6 +87,10 @@ body {
 }
 
 /* Bootstrap sets this to z index of 2 for some reason, and it was appearing over the NavBar */
+.nav {
+  z-index: 1;
+}
+
 .input-group .btn {
   z-index: 0;
 }
