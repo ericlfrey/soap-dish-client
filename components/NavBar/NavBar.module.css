@@ -24,6 +24,7 @@
 
 .navHeading {
   color: var(--linen);
+  text-align: center;
 }
 
 .navLinks {
