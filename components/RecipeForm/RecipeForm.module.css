@@ -37,6 +37,7 @@
 
 .formInputField {
   background-color: var(--linen);
+  width: 17rem;
 }
 
 .sectionHeader {
@@ -49,4 +50,15 @@
 
 .removeOilBtn {
   font-size: .5rem;
+}
+
+.recipeResults {
+  background-color: var(--linen);
+  width: 17rem;
+  font-size: 0.8rem;
+}
+
+.recipeResultsBody {
+  display: flex;
+  justify-content: space-between;
 }

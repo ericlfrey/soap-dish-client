@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import {
+  Button, Card, Form, InputGroup,
+} from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import styles from './RecipeForm.module.css';
@@ -262,8 +264,27 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
       Form to add recipe title, description, notes, and public/private */}
       {formInput.waterAmount
         ? (
-          <div className={styles.recipeFormWrapper}>
-            <div className="recipe-results-container">
+          <>
+            <h3 className={styles.sectionHeader}>Recipe Results</h3>
+            <Card className={styles.recipeResults}>
+              <Card.Body>
+                {formInput.oilList.map((oil) => (
+                  <section className={styles.recipeResultsBody}>
+                    <Card.Text key={oil.oilId}>{`${oil.name}:`}</Card.Text>
+                    <Card.Text key={oil.oilId}>{`${oil.amount} oz.`}</Card.Text>
+                  </section>
+                ))}
+                <section className={styles.recipeResultsBody}>
+                  <Card.Text>Lye Amount:</Card.Text>
+                  <Card.Text>{` ${formInput.lyeAmount} oz.`}</Card.Text>
+                </section>
+                <section className={styles.recipeResultsBody}>
+                  <Card.Text>Water Amount:</Card.Text>
+                  <Card.Text>{` ${formInput.waterAmount} oz.`}</Card.Text>
+                </section>
+              </Card.Body>
+            </Card>
+            {/* <div className="recipe-results-container">
               <h3>Recipe Results:</h3>
               <section>
                 {formInput.oilList.map((oil) => (
@@ -272,8 +293,7 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                 <p>Lye Amount:{` ${formInput.lyeAmount} oz.`}</p>
                 <p>Water Amount:{` ${formInput.waterAmount} oz.`}</p>
               </section>
-              <Button variant="primary" type="button" onClick={saveRecipe}>Save</Button>
-            </div>
+            </div> */}
             <Form>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Title</Form.Label>
@@ -323,8 +343,9 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                   }));
                 }}
               />
+              <Button variant="primary" type="button" onClick={saveRecipe}>Save</Button>
             </Form>
-          </div>
+          </>
         )
         : ''}
     </>
