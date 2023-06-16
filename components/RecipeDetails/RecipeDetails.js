@@ -1,8 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Heart, HeartFill } from 'react-bootstrap-icons';
 
 import Link from 'next/link';
@@ -27,7 +27,9 @@ export default function RecipeDetails({ id }) {
   }, [id, user]);
 
   const handleDelete = () => {
-    deleteRecipe(id).then(() => router.push('/'));
+    if (window.confirm(`Are you sure you want to delete "${recipe.title}"? This action cannot be undone.`)) {
+      deleteRecipe(id).then(() => router.push('/'));
+    }
   };
 
   const handleFavorite = () => {
@@ -40,37 +42,36 @@ export default function RecipeDetails({ id }) {
   };
 
   return (
-    <>
+    <div className={styles.recipeDetailsWrapper}>
       <Card className={styles.card}>
         <Card.Body>
           <section className={styles.favoriteDiv}>
+            <Card.Title className={styles.title}>{recipe.title}</Card.Title>
             <button type="button" className={styles.favoriteBtn} onClick={handleFavorite}>
               {recipe.is_favorite
-                ? (
-                  <HeartFill className={styles.heartFill} />
-                )
-                : (
-                  <Heart className={styles.heart} />
-
-                )}
+                ? <HeartFill className={styles.heartFill} />
+                : <Heart className={styles.heart} />}
               Favorite
             </button>
           </section>
-          <Card.Title>{recipe.title}</Card.Title>
+          <hr />
+          <Card.Text>Ingredients:</Card.Text>
           {recipe.recipe_oils?.map((oil) => (
-            <Card.Text key={oil.id}>{oil.oil_name}: {oil.amount} oz</Card.Text>
+            <Card.Text key={oil.id} className={styles.ingredients}>{oil.oil_name}: {oil.amount} oz</Card.Text>
           ))}
-          <Card.Text>Water: {recipe.water_amount} oz</Card.Text>
-          <Card.Text>Lye: {recipe.lye_amount} oz</Card.Text>
-          <Card.Text>Super fat: {recipe.super_fat * 100}%</Card.Text>
+          <Card.Text className={styles.ingredients}>Water: {recipe.water_amount} oz</Card.Text>
+          <Card.Text className={styles.ingredients}>Lye: {recipe.lye_amount} oz</Card.Text>
+          <Card.Text className={styles.ingredients}>Super fat: {recipe.super_fat * 100}%</Card.Text>
+          <hr />
           <Card.Text>Description:</Card.Text>
           <Card.Text>{recipe.description}</Card.Text>
+          <hr />
           <Card.Text>Notes:</Card.Text>
           <Card.Text>{recipe.notes}</Card.Text>
-          <Card.Text>{recipe.public ? 'Public' : 'Private'}</Card.Text>
           {user.uid === recipe.maker?.uid
             ? (
               <>
+                <hr />
                 <Link href={`/recipe/edit/${id}`} passHref>
                   <Card.Link href="#">Edit</Card.Link>
                 </Link><Card.Link href="#" onClick={handleDelete}>Delete</Card.Link>
@@ -79,7 +80,7 @@ export default function RecipeDetails({ id }) {
             : ''}
         </Card.Body>
       </Card>
-    </>
+    </div>
   );
 }
 
