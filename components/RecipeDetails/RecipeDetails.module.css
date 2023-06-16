@@ -25,6 +25,7 @@
 .favoriteBtn {
   all: unset;
   display: flex;
+  height: 1.5rem;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -42,6 +43,13 @@
   fill: darkred;
   font-size: 1rem;
   margin-right: .5rem;
+}
+
+.ingredientsSection {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px var(--navy);
+  margin: 0 0 0.5rem 0;
 }
 
 .ingredients {

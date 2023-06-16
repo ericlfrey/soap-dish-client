@@ -55,18 +55,27 @@ export default function RecipeDetails({ id }) {
             </button>
           </section>
           <hr />
-          <Card.Text>Ingredients:</Card.Text>
+          <Card.Title>Ingredients:</Card.Title>
           {recipe.recipe_oils?.map((oil) => (
-            <Card.Text key={oil.id} className={styles.ingredients}>{oil.oil_name}: {oil.amount} oz</Card.Text>
+            <section className={styles.ingredientsSection}>
+              <Card.Text key={oil.id} className={styles.ingredients}>{oil.oil_name}:</Card.Text>
+              <Card.Text key={oil.id} className={styles.ingredients}>{Number(oil.amount)} oz</Card.Text>
+            </section>
           ))}
-          <Card.Text className={styles.ingredients}>Water: {recipe.water_amount} oz</Card.Text>
-          <Card.Text className={styles.ingredients}>Lye: {recipe.lye_amount} oz</Card.Text>
-          <Card.Text className={styles.ingredients}>Super fat: {recipe.super_fat * 100}%</Card.Text>
+          <section className={styles.ingredientsSection}>
+            <Card.Text className={styles.ingredients}>Water:</Card.Text>
+            <Card.Text className={styles.ingredients}>{Number(recipe.water_amount)} oz</Card.Text>
+          </section>
+          <section className={styles.ingredientsSection}>
+            <Card.Text className={styles.ingredients}>Lye (NaOH):</Card.Text>
+            <Card.Text className={styles.ingredients}>{Number(recipe.lye_amount)} oz</Card.Text>
+          </section>
+          {/* <Card.Text className={styles.ingredients}>Super fat: {recipe.super_fat * 100}%</Card.Text> */}
           <hr />
-          <Card.Text>Description:</Card.Text>
+          <Card.Title>Description:</Card.Title>
           <Card.Text>{recipe.description}</Card.Text>
           <hr />
-          <Card.Text>Notes:</Card.Text>
+          <Card.Title>Notes:</Card.Title>
           <Card.Text>{recipe.notes}</Card.Text>
           {user.uid === recipe.maker?.uid
             ? (

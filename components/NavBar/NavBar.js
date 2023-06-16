@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Container, Navbar } from 'react-bootstrap';
 import styles from './NavBar.module.css';
-import ProfileDrawer from '../ProfileDrawer/ProfileDrawer';
+import MenuDrawer from '../MenuDrawer/MenuDrawer';
 import logoBeige from '../../public/images/logo_beige.png';
 
 export default function NavBar() {
@@ -21,7 +21,7 @@ export default function NavBar() {
         <h1 className={styles.navHeading}>
           The Soap Dish
         </h1>
-        <ProfileDrawer />
+        <MenuDrawer />
       </Container>
     </Navbar>
   );
