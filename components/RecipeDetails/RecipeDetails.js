@@ -45,7 +45,15 @@ export default function RecipeDetails({ id }) {
         <Card.Body>
           <section className={styles.favoriteDiv}>
             <button type="button" className={styles.favoriteBtn} onClick={handleFavorite}>
-              {recipe.is_favorite ? <HeartFill className={styles.heartFill} /> : <Heart className={styles.heart} />}
+              {recipe.is_favorite
+                ? (
+                  <HeartFill className={styles.heartFill} />
+                )
+                : (
+                  <Heart className={styles.heart} />
+
+                )}
+              Favorite
             </button>
           </section>
           <Card.Title>{recipe.title}</Card.Title>

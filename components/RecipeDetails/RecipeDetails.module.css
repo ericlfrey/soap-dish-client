@@ -11,9 +11,23 @@
 
 .favoriteBtn {
   all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  /* border: 1px solid red; */
+  border-radius: .3rem;
+  padding: .5rem .7rem;
+  font-size: 0.75rem;
+}
+
+.favoriteBtn:hover {
+  background-color: rgba(29, 45, 68, 0.2);
 }
 
 .heart,
 .heartFill {
   fill: darkred;
+  font-size: 1rem;
+  margin-right: .5rem;
 }
