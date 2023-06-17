@@ -1,0 +1,57 @@
+.recipeDetailsWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  margin: 1rem 0 2rem 0;
+  background-color: var(--linen);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  width: 17rem;
+  font-size: .8rem;
+}
+
+.favoriteDiv {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.title {
+  display: flex;
+  margin: 0;
+  align-items: center;
+}
+
+.favoriteBtn {
+  all: unset;
+  display: flex;
+  height: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: .3rem;
+  padding: .5rem .7rem;
+  font-size: 0.75rem;
+}
+
+.favoriteBtn:hover {
+  background-color: rgba(29, 45, 68, 0.2);
+}
+
+.heart,
+.heartFill {
+  fill: darkred;
+  font-size: 1rem;
+  margin-right: .5rem;
+}
+
+.ingredientsSection {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px var(--navy);
+  margin: 0 0 0.5rem 0;
+}
+
+.ingredients {
+  margin: 0;
+}

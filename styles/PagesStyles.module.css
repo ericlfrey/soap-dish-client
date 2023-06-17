@@ -1,0 +1,11 @@
+.pageHeading {
+  margin: 2rem 0 1rem 0;
+  font-size: 2rem;
+}
+
+.recipeCardsDiv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 5rem;
+}

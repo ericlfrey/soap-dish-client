@@ -1,3 +1,7 @@
+.offCanvas {
+  background-color: var(--linen);
+}
+
 .profileBtn {
   all: unset;
   color: #0D1321;
@@ -11,7 +15,8 @@
   list-style-type: none;
 }
 
-.displayPhoto {
-  border-radius: 50%;
+.hamburger {
+  fill: var(--linen);
+  font-size: 2.5rem;
   cursor: pointer;
 }

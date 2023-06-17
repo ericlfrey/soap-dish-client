@@ -2,46 +2,27 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Container, Navbar } from 'react-bootstrap';
 import styles from './NavBar.module.css';
-import ProfileDrawer from '../ProfileDrawer/ProfileDrawer';
-import logoBlue from '../../public/images/logo_blue.png';
+import MenuDrawer from '../MenuDrawer/MenuDrawer';
+import logoBeige from '../../public/images/logo_beige.png';
 
 export default function NavBar() {
   return (
-    <nav className={`navbar navbar-expand-md ${styles.navbar}`}>
-      <div className={`container-fluid ${styles.navContainer}`}>
-        <Link passHref href="/">
-          <a className={`navbar-brand ${styles.navbarBrand}`}>
-            <Image src={logoBlue} height={60} width={60} className={styles.logo} />
-            {/* 🧼 The Soap Dish */}
-          </a>
-        </Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon" />
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <ul className={`navbar-nav me-auto ${styles.navbarNav}`}>
-            <div className={`nav-links ${styles.navLinks}`}>
-              <li className={`nav-item ${styles.navItem}`}>
-                <Link passHref href="/">
-                  <a className={`${styles.navLink} nav-link`}>
-                    Home
-                  </a>
-                </Link>
-              </li>
-              <li className={`nav-item ${styles.navItem}`}>
-                <Link passHref href="/recipe/new">
-                  <a className={`${styles.navLink} nav-link`}>
-                    Add New Recipe
-                  </a>
-                </Link>
-              </li>
+    <Navbar className={styles.navbar}>
+      <Container fluid>
+        <Navbar.Brand href="#">
+          <Link passHref href="/">
+            <div className={`navbar-brand ${styles.navbarBrand}`}>
+              <Image src={logoBeige} height={60} width={60} className={styles.logo} />
             </div>
-            <ProfileDrawer />
-          </ul>
-        </div>
-      </div>
-    </nav>
+          </Link>
+        </Navbar.Brand>
+        <h1 className={styles.navHeading}>
+          The Soap Dish
+        </h1>
+        <MenuDrawer />
+      </Container>
+    </Navbar>
   );
 }

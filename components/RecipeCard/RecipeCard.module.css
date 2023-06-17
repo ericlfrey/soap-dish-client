@@ -1,0 +1,45 @@
+.card {
+  width: 18rem;
+  color: var(--navy);
+  margin: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: .45rem;
+  border-color: transparent;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardBody:hover {
+  background-color: rgba(29, 45, 68, 0.4);
+  border-radius: .45rem;
+}
+
+.soapIcon {
+  font-size: 5rem;
+}
+
+.cardDetails {
+  display: none;
+  font-size: .8rem;
+  color: var(--linen);
+  opacity: .8;
+}
+
+.card:hover {
+  .cardTitle {
+    color: var(--dark-blue);
+  }
+
+  .soapIcon {
+    display: none;
+  }
+
+  .cardDetails {
+    display: block;
+  }
+}

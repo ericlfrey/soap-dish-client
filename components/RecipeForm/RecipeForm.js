@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import {
+  Button, Card, Form, InputGroup,
+} from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import styles from './RecipeForm.module.css';
@@ -164,12 +166,14 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
 
   return (
     <>
-      <div className={styles.recipeFormWrapper}>
+      {/* <div className={styles.recipeFormWrapper}> */}
+      <div>
         <div className="recipe-form-container">
           {/* Initial Form to add Total oil amount, water percentage, and super fat */}
           <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className={styles.formGroup}>
               <Form.Control
+                className={styles.formInputFieldTop}
                 type="number"
                 placeholder="Enter total weight of oil in ounces"
                 name="totalOil"
@@ -177,7 +181,10 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                 onChange={handleChange}
               />
               <Form.Text>Enter total weight of oils in ounces</Form.Text>
+            </Form.Group>
+            <Form.Group className={styles.formGroup}>
               <Form.Control
+                className={styles.formInputFieldTop}
                 type="number"
                 placeholder="Water as a percent of oils"
                 name="waterPercentage"
@@ -185,7 +192,10 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                 onChange={handleChange}
               />
               <Form.Text>Water as a percent of oils</Form.Text>
+            </Form.Group>
+            <Form.Group className={styles.formGroup}>
               <Form.Control
+                className={styles.formInputFieldTop}
                 type="number"
                 placeholder="Super Fat Percentage"
                 name="superFat"
@@ -195,17 +205,21 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
               <Form.Text>Super Fat Percentage</Form.Text>
             </Form.Group>
           </Form>
+          <hr />
           {/* Form Select to add oils to recipe */}
+          <h3 className={styles.sectionHeader}>Select Oils</h3>
           <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Select name="currentOil" id="currentOil">
-                {allOils.map((oil) => <option key={oil.id} value={oil.id}>{oil.name}</option>)}
-              </Form.Select>
+            <Form.Group className={styles.formGroup} controlId="formBasicEmail">
+              <InputGroup className={styles.oilSelectGrp}>
+                <Form.Select name="currentOil" id="currentOil" className={styles.oilSelect}>
+                  {allOils.map((oil) => <option key={oil.id} value={oil.id}>{oil.name}</option>)}
+                </Form.Select>
+                <Button type="button" onClick={addOils} className={styles.zBtn} id="zBtn">
+                  +
+                </Button>
+              </InputGroup>
               <Form.Text>Select an Oil to add</Form.Text>
             </Form.Group>
-            <Button variant="primary" type="button" onClick={addOils}>
-              Add Oil
-            </Button>
           </Form>
         </div>
         <div className="oil-list-container">
@@ -214,23 +228,27 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
             {oils?.length > 0
               ? (
                 <>
-                  <h3>Oils:</h3>
+                  <hr />
+                  <h3 className={styles.sectionHeader}>Oils:</h3>
                   <Form onSubmit={calculateRecipe}>
                     {oils?.map((oil) => (
-                      <div key={oil.oilId}>
-                        <h3 key={oil.oilId}>{oil.name}</h3>
-                        <InputGroup>
+                      <section key={oil.oilId}>
+                        <div className={styles.oilNameBtn}>
+                          <h5 key={oil.oilId} className={styles.oilName}>{`${oils.indexOf(oil) + 1}. ${oil.name}`}</h5>
+                          <Button onClick={removeOil} value={oil.oilId} className={styles.removeOilBtn}>remove</Button>
+                        </div>
+                        <Form.Group className={styles.singleOil}>
                           <Form.Control
+                            className={styles.oilInput}
                             id={`oilAmount--${oil.oilId}`}
                             name={oil.oilId}
                             type="number"
-                            placeholder="Amount in ounces"
                             onChange={handleAmountChange}
                             {...oil.amount > 0 ? { value: Number(oil.amount) } : { value: '' }}
                           />
-                          <Button onClick={removeOil} value={oil.oilId}>-</Button>
-                        </InputGroup>
-                      </div>
+                          <Form.Text>Amount in ounces</Form.Text>
+                        </Form.Group>
+                      </section>
                     ))}
                     <Button variant="primary" type="submit">Calculate Recipe</Button>
                   </Form>
@@ -245,22 +263,33 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
       Form to add recipe title, description, notes, and public/private */}
       {formInput.waterAmount
         ? (
-          <div className={styles.recipeFormWrapper}>
-            <div className="recipe-results-container">
-              <h3>Recipe Results:</h3>
-              <section>
+          <>
+            <h3 className={styles.sectionHeader}>Recipe Results</h3>
+            {/* Recipe Results */}
+            <Card className={styles.recipeResults}>
+              <Card.Body>
                 {formInput.oilList.map((oil) => (
-                  <p key={oil.oilId}>{`${oil.name}: ${oil.amount} oz.`}</p>
+                  <section key={oil.oilId} className={styles.recipeResultsBody}>
+                    <Card.Text>{`${oil.name}:`}</Card.Text>
+                    <Card.Text>{`${oil.amount} oz.`}</Card.Text>
+                  </section>
                 ))}
-                <p>Lye Amount:{` ${formInput.lyeAmount} oz.`}</p>
-                <p>Water Amount:{` ${formInput.waterAmount} oz.`}</p>
-              </section>
-              <Button variant="primary" type="button" onClick={saveRecipe}>Save</Button>
-            </div>
-            <Form>
+                <section className={styles.recipeResultsBody}>
+                  <Card.Text>Lye Amount:</Card.Text>
+                  <Card.Text>{` ${formInput.lyeAmount} oz.`}</Card.Text>
+                </section>
+                <section className={styles.recipeResultsBody}>
+                  <Card.Text>Water Amount:</Card.Text>
+                  <Card.Text>{` ${formInput.waterAmount} oz.`}</Card.Text>
+                </section>
+              </Card.Body>
+            </Card>
+            {/* Form for Title, Description, and Notes */}
+            <Form className={styles.lastForm}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Title</Form.Label>
                 <Form.Control
+                  className={styles.formInputField}
                   type="textarea"
                   placeholder="Recipe Title"
                   name="title"
@@ -273,6 +302,7 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                 <Form.Label>Description</Form.Label>
                 <Form.Control
                   as="textarea"
+                  className={styles.formInputField}
                   rows={3}
                   name="description"
                   value={formInput.description}
@@ -283,6 +313,7 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                 <Form.Label>Notes</Form.Label>
                 <Form.Control
                   as="textarea"
+                  className={styles.formInputField}
                   rows={3}
                   name="notes"
                   value={formInput.notes}
@@ -290,6 +321,8 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                 />
               </Form.Group>
               <Form.Check
+                id="formCheck"
+                className={styles.formCheck}
                 type="switch"
                 name="public"
                 label="Public?"
@@ -301,8 +334,9 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                   }));
                 }}
               />
+              <Button variant="primary" type="button" onClick={saveRecipe}>Save</Button>
             </Form>
-          </div>
+          </>
         )
         : ''}
     </>

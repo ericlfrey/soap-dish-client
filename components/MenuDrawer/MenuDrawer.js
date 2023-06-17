@@ -1,35 +1,30 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 import { Offcanvas } from 'react-bootstrap';
+import { List } from 'react-bootstrap-icons';
 import Link from 'next/link';
-import Image from 'next/image';
 import { signOut } from '../../utils/auth';
-import styles from './ProfileDrawer.module.css';
-import { useAuth } from '../../utils/context/authContext';
+import styles from './MenuDrawer.module.css';
 
 export default function ProfileDrawer() {
   const [show, setShow] = useState(false);
-  const { user } = useAuth();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   return (
     <>
-      <Image
-        src={user.fbUser.photoURL}
-        alt="Picture of the user"
-        className={styles.displayPhoto}
-        width="60"
-        height="60"
+      <List
+        className={styles.hamburger}
         onClick={handleShow}
       />
 
-      <Offcanvas show={show} onHide={handleClose} placement="end">
+      <Offcanvas show={show} onHide={handleClose} placement="end" className={styles.offCanvas}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Profile</Offcanvas.Title>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body className={styles.offCanvas}>
           <ul>
             <li className={styles.listItem} onClick={handleClose}>
               <Link href="/">

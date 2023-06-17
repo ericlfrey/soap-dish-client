@@ -3,3 +3,66 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.formGroup,
+.singleOil,
+.oilNameBtn {
+  display: flex;
+}
+
+.formInputFieldTop,
+.oilInput {
+  background-color: var(--linen);
+  width: 5rem;
+  margin: 0 1rem 1rem 0
+}
+
+.oilSelect {
+  background-color: var(--linen);
+  font-size: 0.8rem;
+}
+
+.oilSelect:focus,
+.formInputField:focus,
+.formInputFieldTop:focus,
+.oilInput:focus {
+  background-color: var(--linen);
+  box-shadow: none;
+}
+
+.oilSelectGrp {
+  width: 15rem;
+  margin: 0 1rem 1rem 0
+}
+
+.formInputField {
+  background-color: var(--linen);
+  width: 17rem;
+}
+
+.sectionHeader {
+  margin-bottom: 1.5rem;
+}
+
+.oilName {
+  margin-right: 1rem;
+}
+
+.removeOilBtn {
+  font-size: .5rem;
+}
+
+.recipeResults {
+  background-color: var(--linen);
+  width: 17rem;
+  font-size: 0.8rem;
+}
+
+.recipeResultsBody {
+  display: flex;
+  justify-content: space-between;
+}
+
+.lastForm {
+  margin-bottom: 3rem;
+}

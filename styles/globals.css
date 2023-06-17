@@ -1,11 +1,21 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 
+:root {
+  --dark-blue: #0D1321;
+  --navy: rgb(29, 45, 68);
+  --teal: #3E5C76;
+  --light-blue: #748CAB;
+  --linen: rgb(240, 235, 216);
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Comfortaa', sans-serif;
+  /* font-family: 'Pacifico', cursive; */
 }
 
 a {
@@ -15,16 +25,11 @@ a {
 
 * {
   box-sizing: border-box;
+  color: var(--dark-blue);
 }
 
 body {
-  background-color: #F0EBD8;
-}
-
-.recipeCardsDiv {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  background-color: var(--light-blue);
 }
 
 .signin-div {
@@ -34,16 +39,51 @@ body {
   margin-top: 100px;
 }
 
-.signin_btn {
-  background-color: #1D2D44;
-  color: #F0EBD8;
+.btn {
+  background-color: var(--navy);
+  color: var(--linen);
   border: none;
 }
 
-.signin_btn:hover,
-.signin_btn:focus-visible,
-div .signin_btn:active,
-#signinBtn:active {
-  background-color: #3E5C76;
+.btn:hover,
+.btn:focus-visible,
+.btn:active,
+#signinBtn:active,
+.btn-check:checked+.btn,
+:not(.btn-check)+.btn:active,
+.btn:first-child:active,
+.btn.active,
+.btn.show {
+  background-color: var(--teal);
   box-shadow: none;
+}
+
+/* Styles for the form checks- could not get them in the module */
+.form-check-input,
+#formCheck {
+  background-color: var(--linen);
+  border-color: var(--navy);
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(29, 45, 68,0.9)'/></svg>");
+}
+
+.form-check-input:checked,
+.form-check-input:focus,
+.form-check-input:focus-visible,
+#formCheck:checked,
+#formCheck:focus,
+#formCheck:focus-visible {
+  background-color: var(--navy);
+  border-color: var(--navy);
+  box-shadow: none;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(240, 235, 216,0.9)'/></svg>");
+  /* i want the color of the switch to change */
+}
+
+/* Bootstrap sets this to z index of 2 for some reason, and it was appearing over the NavBar */
+.nav {
+  z-index: 1;
+}
+
+.input-group .btn {
+  z-index: 0;
 }
