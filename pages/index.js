@@ -9,12 +9,8 @@ export default function Home() {
   const [recipes, setRecipes] = useState([]);
   const { user } = useAuth();
 
-  const getAllUserRecipes = () => {
-    getUserRecipes(user.uid).then(setRecipes);
-  };
-
   useEffect(() => {
-    getAllUserRecipes();
+    getUserRecipes(user.uid).then(setRecipes);
   }, [user]);
 
   return (
@@ -27,8 +23,6 @@ export default function Home() {
             id={recipe.id}
             title={recipe.title}
             description={recipe.description}
-            uid={recipe.maker?.uid}
-            onUpdate={getAllUserRecipes}
           />
         ))}
       </div>

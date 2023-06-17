@@ -9,12 +9,8 @@ export default function FavoritesViewPage() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const { user } = useAuth();
 
-  const getAllFavoriteRecipes = () => {
-    getFavoriteRecipes(user.uid).then(setFavoriteRecipes);
-  };
-
   useEffect(() => {
-    getAllFavoriteRecipes();
+    getFavoriteRecipes(user.uid).then(setFavoriteRecipes);
   }, []);
 
   return (
@@ -27,8 +23,6 @@ export default function FavoritesViewPage() {
             id={recipe.id}
             title={recipe.title}
             description={recipe.description}
-            uid={recipe.maker?.uid}
-            onUpdate={getAllFavoriteRecipes}
           />
         ))}
       </div>

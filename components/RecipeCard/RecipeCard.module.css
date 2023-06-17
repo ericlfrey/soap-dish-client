@@ -1,14 +1,11 @@
 .card {
   width: 18rem;
   color: var(--navy);
-  /* height: 15rem; */
   margin: 1rem;
   cursor: pointer;
   background-color: transparent;
   border-radius: .45rem;
   border-color: transparent;
-  /* border: none; */
-  /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
 }
 
 .cardBody {

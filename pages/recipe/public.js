@@ -6,12 +6,8 @@ import styles from '../../styles/PagesStyles.module.css';
 export default function PublicViewPage() {
   const [publicRecipes, setPublicRecipes] = useState([]);
 
-  const getAllPublicRecipes = () => {
-    getPublicRecipes().then(setPublicRecipes);
-  };
-
   useEffect(() => {
-    getAllPublicRecipes();
+    getPublicRecipes().then(setPublicRecipes);
   }, []);
 
   return (
@@ -24,8 +20,6 @@ export default function PublicViewPage() {
             id={recipe.id}
             title={recipe.title}
             description={recipe.description}
-            uid={recipe.maker?.uid}
-            onUpdate={getAllPublicRecipes}
           />
         ))}
       </div>
