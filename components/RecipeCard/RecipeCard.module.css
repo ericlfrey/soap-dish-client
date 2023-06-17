@@ -1,29 +1,48 @@
 .card {
   width: 18rem;
-  height: 15rem;
+  color: var(--navy);
+  /* height: 15rem; */
   margin: 1rem;
   cursor: pointer;
-  border: none;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-.cardHeader {
-  background-color: var(--teal);
-  color: var(--linen)
+  background-color: transparent;
+  border-radius: .45rem;
+  border-color: transparent;
+  /* border: none; */
+  /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
 }
 
 .cardBody {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  background-color: var(--linen);
+  align-items: center;
 }
 
-.cardFooter {
-  background-color: var(--linen);
-  border: none
+.cardBody:hover {
+  background-color: rgba(29, 45, 68, 0.4);
+  border-radius: .45rem;
 }
 
-.cardLinks {
-  margin-top: auto;
+.soapIcon {
+  font-size: 5rem;
+}
+
+.cardDetails {
+  display: none;
+  font-size: .8rem;
+  color: var(--linen);
+  opacity: .8;
+}
+
+.card:hover {
+  .cardTitle {
+    color: var(--dark-blue);
+  }
+
+  .soapIcon {
+    display: none;
+  }
+
+  .cardDetails {
+    display: block;
+  }
 }
