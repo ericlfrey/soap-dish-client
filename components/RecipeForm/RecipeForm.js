@@ -206,7 +206,6 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
             </Form.Group>
           </Form>
           <hr />
-
           {/* Form Select to add oils to recipe */}
           <h3 className={styles.sectionHeader}>Select Oils</h3>
           <Form>
@@ -266,12 +265,13 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
         ? (
           <>
             <h3 className={styles.sectionHeader}>Recipe Results</h3>
+            {/* Recipe Results */}
             <Card className={styles.recipeResults}>
               <Card.Body>
                 {formInput.oilList.map((oil) => (
-                  <section className={styles.recipeResultsBody}>
-                    <Card.Text key={oil.oilId}>{`${oil.name}:`}</Card.Text>
-                    <Card.Text key={oil.oilId}>{`${oil.amount} oz.`}</Card.Text>
+                  <section key={oil.oilId} className={styles.recipeResultsBody}>
+                    <Card.Text>{`${oil.name}:`}</Card.Text>
+                    <Card.Text>{`${oil.amount} oz.`}</Card.Text>
                   </section>
                 ))}
                 <section className={styles.recipeResultsBody}>
@@ -284,17 +284,8 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                 </section>
               </Card.Body>
             </Card>
-            {/* <div className="recipe-results-container">
-              <h3>Recipe Results:</h3>
-              <section>
-                {formInput.oilList.map((oil) => (
-                  <p key={oil.oilId}>{`${oil.name}: ${oil.amount} oz.`}</p>
-                ))}
-                <p>Lye Amount:{` ${formInput.lyeAmount} oz.`}</p>
-                <p>Water Amount:{` ${formInput.waterAmount} oz.`}</p>
-              </section>
-            </div> */}
-            <Form>
+            {/* Form for Title, Description, and Notes */}
+            <Form className={styles.lastForm}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Title</Form.Label>
                 <Form.Control

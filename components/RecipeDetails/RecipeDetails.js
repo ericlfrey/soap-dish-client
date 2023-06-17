@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import { Heart, HeartFill } from 'react-bootstrap-icons';
-
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -70,7 +69,6 @@ export default function RecipeDetails({ id }) {
             <Card.Text className={styles.ingredients}>Lye (NaOH):</Card.Text>
             <Card.Text className={styles.ingredients}>{Number(recipe.lye_amount)} oz</Card.Text>
           </section>
-          {/* <Card.Text className={styles.ingredients}>Super fat: {recipe.super_fat * 100}%</Card.Text> */}
           <hr />
           <Card.Title>Description:</Card.Title>
           <Card.Text>{recipe.description}</Card.Text>

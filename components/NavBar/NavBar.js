@@ -21,7 +21,6 @@ export default function NavBar() {
         <h1 className={styles.navHeading}>
           The Soap Dish
         </h1>
-
         <MenuDrawer />
       </Container>
     </Navbar>
