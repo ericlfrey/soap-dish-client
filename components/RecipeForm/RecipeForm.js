@@ -276,11 +276,11 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                 ))}
                 <section className={styles.recipeResultsBody}>
                   <Card.Text>Lye Amount:</Card.Text>
-                  <Card.Text>{` ${formInput.lyeAmount} oz.`}</Card.Text>
+                  <Card.Text>{` ${Number(formInput.lyeAmount)} oz.`}</Card.Text>
                 </section>
                 <section className={styles.recipeResultsBody}>
                   <Card.Text>Water Amount:</Card.Text>
-                  <Card.Text>{` ${formInput.waterAmount} oz.`}</Card.Text>
+                  <Card.Text>{` ${Number(formInput.waterAmount)} oz.`}</Card.Text>
                 </section>
               </Card.Body>
             </Card>

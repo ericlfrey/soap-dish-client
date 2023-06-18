@@ -1,5 +1,6 @@
 .card {
   width: 18rem;
+  height: 15rem;
   color: var(--navy);
   margin: 1rem;
   cursor: pointer;
@@ -28,6 +29,8 @@
   font-size: .8rem;
   color: var(--linen);
   opacity: .8;
+  text-align: center;
+  margin-top: 3rem;
 }
 
 .card:hover {

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { registerUser } from '../utils/auth'; // Update with path to registerUser
+import styles from '../styles/RegisterForm.module.css';
 
 function RegisterForm({ user, updateUser }) {
   const [formData, setFormData] = useState({
@@ -26,7 +27,8 @@ function RegisterForm({ user, updateUser }) {
 
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
+      <h1 className={styles.registerFormHeading}>Register New User</h1>
+      <Form onSubmit={handleSubmit} className={styles.registerForm}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>First Name</Form.Label>
           <Form.Control
@@ -34,6 +36,7 @@ function RegisterForm({ user, updateUser }) {
             placeholder="Enter your first name"
             autoComplete="off"
             required
+            className={styles.formInput}
             onChange={handleChange}
           />
         </Form.Group>
@@ -44,14 +47,13 @@ function RegisterForm({ user, updateUser }) {
             placeholder="Enter your last name"
             autoComplete="off"
             required
+            className={styles.formInput}
             onChange={handleChange}
           />
         </Form.Group>
-        <div>
-          <Button type="submit">
-            Submit
-          </Button>
-        </div>
+        <Button type="submit">
+          Submit
+        </Button>
       </Form>
     </div>
   );

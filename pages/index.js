@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
 import RecipeCard from '../components/RecipeCard/RecipeCard';
 import { getUserRecipes } from '../utils/data/recipeData';
 import { useAuth } from '../utils/context/authContext';
@@ -15,6 +16,9 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>The Soap Dish | Your Recipes</title>
+      </Head>
       <h1 className={styles.pageHeading}>Your Recipes</h1>
       <div className={styles.recipeCardsDiv}>
         {recipes.map((recipe) => (
