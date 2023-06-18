@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import { getSingleRecipe } from '../../../utils/data/recipeData';
 import { useAuth } from '../../../utils/context/authContext';
 import RecipeForm from '../../../components/RecipeForm/RecipeForm';
@@ -25,6 +26,9 @@ export default function EditRecipePage() {
 
   return (
     <>
+      <Head>
+        <title>The Soap Dish | Edit {`${recipe.title}`}</title>
+      </Head>
       <RecipeForm recipeObject={recipe} totalOil={totalOil} oilList={oilList} />
     </>
   );

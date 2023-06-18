@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
 import { getFavoriteRecipes } from '../../utils/data/recipeData';
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import { useAuth } from '../../utils/context/authContext';
@@ -15,6 +16,9 @@ export default function FavoritesViewPage() {
 
   return (
     <>
+      <Head>
+        <title>The Soap Dish | Favorites</title>
+      </Head>
       <h1 className={styles.pageHeading}>Favorites</h1>
       <div className={styles.recipeCardsDiv}>
         {favoriteRecipes.map((recipe) => (
