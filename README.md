@@ -62,6 +62,7 @@ npm run prepare
 npm run dev
 ```
 8. Click http://localhost:3000 in the terminal to open the browser
+9. Setup and run the [The Soap Dish Server](https://github.com/ericlfrey/soap-dish-server) for this project to run on local machine.
 
 
 
