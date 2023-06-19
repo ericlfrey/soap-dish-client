@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
-import { Heart, HeartFill, TypeH1 } from 'react-bootstrap-icons';
+import { Heart, HeartFill } from 'react-bootstrap-icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -101,7 +101,7 @@ export default function RecipeDetails({ id }) {
             : ''}
         </Card.Body>
       </Card>
-    </div >
+    </div>
   );
 }
 
