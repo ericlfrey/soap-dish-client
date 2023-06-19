@@ -7,12 +7,14 @@
   margin: 1rem 0 2rem 0;
   background-color: var(--linen);
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  width: 17rem;
+  /* width: 17rem; */
+  width: 90%;
   font-size: .8rem;
 }
 
 .favoriteDiv {
   display: flex;
+  justify-content: space-between;
   margin-bottom: 1rem;
 }
 

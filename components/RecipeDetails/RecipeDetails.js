@@ -92,8 +92,7 @@ export default function RecipeDetails({ id }) {
                 <Card.Title>Comments:</Card.Title>
                 {recipe.recipe_comments?.map((comment) => (
                   <>
-                    <p>{comment.text}</p>
-                    <p>{comment.commenter}</p>
+                    <p>{comment.text} - {comment.commenter}</p>
                   </>
                 ))}
               </>
