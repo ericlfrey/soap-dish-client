@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
-import { Heart, HeartFill } from 'react-bootstrap-icons';
+import { Heart, HeartFill, TypeH1 } from 'react-bootstrap-icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -85,9 +85,23 @@ export default function RecipeDetails({ id }) {
               </>
             )
             : ''}
+          {recipe.recipe_comments?.length > 0
+            ? (
+              <>
+                <hr />
+                <Card.Title>Comments:</Card.Title>
+                {recipe.recipe_comments?.map((comment) => (
+                  <>
+                    <p>{comment.text}</p>
+                    <p>{comment.commenter}</p>
+                  </>
+                ))}
+              </>
+            )
+            : ''}
         </Card.Body>
       </Card>
-    </div>
+    </div >
   );
 }
 
