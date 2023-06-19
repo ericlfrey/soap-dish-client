@@ -9,7 +9,7 @@ const initialState = {
 };
 
 export default function CommentForm({ recipeId, refreshPage }) {
-  const [formInput, setFormInput] = useState({});
+  const [formInput, setFormInput] = useState(initialState);
   const { user } = useAuth();
 
   const handleChange = (e) => {
@@ -27,11 +27,12 @@ export default function CommentForm({ recipeId, refreshPage }) {
       dateAdded: new Date(),
       recipeId,
     };
-    postComment(payload, user.uid).then(() => refreshPage());
     setFormInput(initialState);
+    postComment(payload, user.uid).then(() => refreshPage());
   };
 
   return (
+
     <Form onSubmit={handleSubmit}>
       <Form.Group>
         <Form.Label>Leave a Comment:</Form.Label>
@@ -40,7 +41,8 @@ export default function CommentForm({ recipeId, refreshPage }) {
           rows={3}
           placeholder="Leave a comment here"
           name="text"
-          value={formInput.value}
+          value={formInput.text}
+          required
           onChange={handleChange}
         />
       </Form.Group>
