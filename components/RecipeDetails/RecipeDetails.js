@@ -11,6 +11,7 @@ import {
 } from '../../utils/data/recipeData';
 import { useAuth } from '../../utils/context/authContext';
 import styles from './RecipeDetails.module.css';
+import CommentForm from '../CommentForm/CommentForm';
 
 export default function RecipeDetails({ id }) {
   const [recipe, setRecipe] = useState({});
@@ -91,13 +92,12 @@ export default function RecipeDetails({ id }) {
                 <hr />
                 <Card.Title>Comments:</Card.Title>
                 {recipe.recipe_comments?.map((comment) => (
-                  <>
-                    <p>{comment.text} - {comment.commenter}</p>
-                  </>
+                  <p key={comment.comment_id}>{comment.text} - {comment.commenter}</p>
                 ))}
               </>
             )
             : ''}
+          <CommentForm recipeId={id} refreshPage={refreshPage} />
         </Card.Body>
       </Card>
     </div>
