@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Trash, PencilSquare } from 'react-bootstrap-icons';
+import { Trash, PencilSquare, Save } from 'react-bootstrap-icons';
 import { Button, Card, Form } from 'react-bootstrap';
 import styles from './Comment.module.css';
 import { deleteComment, updateComment } from '../../utils/data/commentData';
@@ -60,7 +60,12 @@ export default function Comment({
                 onChange={handleChange}
                 required
               />
-              <Button onClick={handleSubmit}>save</Button>
+              {/* <span className={styles.saveSpan}> */}
+              <Button onClick={handleSubmit} className={styles.saveBtn}><Save className={styles.saveIcon} /> Save</Button>
+              {/* <Save onClick={handleSubmit} className={styles.saveIcon} /> */}
+              {/* <p>Save</p> */}
+              {/* </span> */}
+              {/* <Button onClick={handleSubmit}>save</Button> */}
             </>
           )}
         {commenterId === userId && !show

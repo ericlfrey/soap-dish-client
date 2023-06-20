@@ -26,3 +26,17 @@
   cursor: pointer;
   fill: maroon;
 }
+
+.saveBtn,
+.saveBtn:hover {
+  all: unset;
+  color: green;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.saveIcon {
+  font-size: 1rem;
+  fill: green;
+  margin-right: 0.3rem;
+}

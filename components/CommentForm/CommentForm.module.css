@@ -1,0 +1,14 @@
+.commentForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.commentFormBtnDiv {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.commentFormBtn {
+  font-size: .6rem;
+}

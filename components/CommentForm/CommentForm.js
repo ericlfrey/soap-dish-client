@@ -3,6 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { postComment } from '../../utils/data/commentData';
 import { useAuth } from '../../utils/context/authContext';
+import styles from './CommentForm.module.css';
 
 const initialState = {
   text: '',
@@ -32,21 +33,22 @@ export default function CommentForm({ recipeId, refreshPage }) {
   };
 
   return (
-
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className={styles.commentForm}>
       <Form.Group>
-        <Form.Label>Leave a Comment:</Form.Label>
+        <Form.Label>Leave a comment:</Form.Label>
         <Form.Control
           as="textarea"
           rows={3}
-          placeholder="Leave a comment here"
+          placeholder="..."
           name="text"
           value={formInput.text}
           required
           onChange={handleChange}
         />
       </Form.Group>
-      <Button type="submit">Add</Button>
+      <div className={styles.commentFormBtnDiv}>
+        <Button className={styles.commentFormBtn} type="submit">Add Comment</Button>
+      </div>
     </Form>
   );
 }

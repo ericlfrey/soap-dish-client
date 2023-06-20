@@ -57,3 +57,22 @@
 .ingredients {
   margin: 0;
 }
+
+.commentNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.2rem;
+  width: 1.2rem;
+  font-size: 0.6rem;
+  background-color: var(--teal);
+  color: var(--linen);
+  padding: .6rem;
+  border-radius: 50%;
+  margin: 0 .3rem
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}

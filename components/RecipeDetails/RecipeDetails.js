@@ -91,7 +91,10 @@ export default function RecipeDetails({ id }) {
             ? (
               <>
                 <hr />
-                <Card.Title>Comments:</Card.Title>
+                <Card.Title className={styles.flex}>Comments
+                  <div className={styles.commentNumber}>{recipe.recipe_comments?.length}</div>
+                  :
+                </Card.Title>
                 {recipe.recipe_comments?.map((comment) => (
                   <Comment
                     key={comment.comment_id}
