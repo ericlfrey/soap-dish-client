@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Trash, PencilSquare } from 'react-bootstrap-icons';
+import { Card } from 'react-bootstrap';
 import styles from './Comment.module.css';
 import { deleteComment } from '../../utils/data/commentData';
 
@@ -9,6 +10,7 @@ export default function Comment({
   commentId,
   commenterName,
   commenterId,
+  date,
   text,
   refreshPage,
 }) {
@@ -17,26 +19,35 @@ export default function Comment({
       deleteComment(commentId).then(refreshPage);
     }
   };
+
+  const displayDate = `${new Date(date).toLocaleDateString()} ${new Date(date).toLocaleTimeString()}`;
+
   return (
-    <section className={styles.comment}>
-      <p>{text} - {commenterName}</p>
-      {commenterId === userId
-        ? (
-          <>
-            <PencilSquare className={styles.commentIcons} />
-            <Trash onClick={handleDelete} className={styles.commentIcons} />
-          </>
-        )
-        : ''}
-    </section>
+    <Card className={styles.commentCard}>
+      <Card.Body>
+        <Card.Title className={styles.name}>{commenterName}</Card.Title>
+        <Card.Subtitle className={styles.date}>{displayDate}</Card.Subtitle>
+        <Card.Text className={styles.text}>{text} </Card.Text>
+        {commenterId === userId
+          ? (
+            <>
+              <Card.Link href="#"><PencilSquare className={styles.editIcon} /></Card.Link>
+              <Card.Link href="#"><Trash onClick={handleDelete} className={styles.trashIcon} /></Card.Link>
+            </>
+          )
+          : ''}
+
+      </Card.Body>
+    </Card>
   );
 }
 
 Comment.propTypes = {
-  userId: PropTypes.number.isRequired,
-  commenterId: PropTypes.number.isRequired,
   commentId: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
+  commenterId: PropTypes.number.isRequired,
   commenterName: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
   refreshPage: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
 };
