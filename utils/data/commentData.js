@@ -26,8 +26,8 @@ const postComment = (comment, uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateComment = (comment) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/comments/${comment.id}`, {
+const updateComment = (comment, commentId) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/comments/${commentId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
