@@ -160,7 +160,11 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
         water_amount: formInput.waterAmount,
         oilList: recipeOils,
       };
-      createRecipe(payload).then((recipe) => router.push(`/recipe/${recipe.id}`));
+      if (formInput.title === '') {
+        window.alert('Please enter a title');
+      } else {
+        createRecipe(payload).then((recipe) => router.push(`/recipe/${recipe.id}`));
+      }
     }
   };
 

@@ -12,6 +12,7 @@ import {
 import { useAuth } from '../../utils/context/authContext';
 import styles from './RecipeDetails.module.css';
 import CommentForm from '../CommentForm/CommentForm';
+import Comment from '../Comment/Comment';
 
 export default function RecipeDetails({ id }) {
   const [recipe, setRecipe] = useState({});
@@ -76,7 +77,7 @@ export default function RecipeDetails({ id }) {
           <hr />
           <Card.Title>Notes:</Card.Title>
           <Card.Text>{recipe.notes}</Card.Text>
-          {user.uid === recipe.maker?.uid
+          {user.id === recipe.maker_id
             ? (
               <>
                 <hr />
@@ -92,7 +93,13 @@ export default function RecipeDetails({ id }) {
                 <hr />
                 <Card.Title>Comments:</Card.Title>
                 {recipe.recipe_comments?.map((comment) => (
-                  <p key={comment.comment_id}>{comment.text} - {comment.commenter}</p>
+                  <Comment
+                    key={comment.comment_id}
+                    text={comment.text}
+                    commenterName={comment.commenter_name}
+                    commenterId={comment.commenter_id}
+                    userId={user.id}
+                  />
                 ))}
               </>
             )
