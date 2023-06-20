@@ -160,103 +160,104 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
         water_amount: formInput.waterAmount,
         oilList: recipeOils,
       };
-      createRecipe(payload).then((recipe) => router.push(`/recipe/${recipe.id}`));
+      if (formInput.title === '') {
+        window.alert('Please enter a title');
+      } else {
+        createRecipe(payload).then((recipe) => router.push(`/recipe/${recipe.id}`));
+      }
     }
   };
 
   return (
     <>
-      {/* <div className={styles.recipeFormWrapper}> */}
-      <div>
-        <div className="recipe-form-container">
-          {/* Initial Form to add Total oil amount, water percentage, and super fat */}
-          <Form>
-            <Form.Group className={styles.formGroup}>
-              <Form.Control
-                className={styles.formInputFieldTop}
-                type="number"
-                placeholder="Enter total weight of oil in ounces"
-                name="totalOil"
-                value={formInput.totalOil}
-                onChange={handleChange}
-              />
-              <Form.Text>Enter total weight of oils in ounces</Form.Text>
-            </Form.Group>
-            <Form.Group className={styles.formGroup}>
-              <Form.Control
-                className={styles.formInputFieldTop}
-                type="number"
-                placeholder="Water as a percent of oils"
-                name="waterPercentage"
-                value={formInput.waterPercentage}
-                onChange={handleChange}
-              />
-              <Form.Text>Water as a percent of oils</Form.Text>
-            </Form.Group>
-            <Form.Group className={styles.formGroup}>
-              <Form.Control
-                className={styles.formInputFieldTop}
-                type="number"
-                placeholder="Super Fat Percentage"
-                name="superFat"
-                value={formInput.superFat}
-                onChange={handleChange}
-              />
-              <Form.Text>Super Fat Percentage</Form.Text>
-            </Form.Group>
-          </Form>
-          <hr />
-          {/* Form Select to add oils to recipe */}
-          <h3 className={styles.sectionHeader}>Select Oils</h3>
-          <Form>
-            <Form.Group className={styles.formGroup} controlId="formBasicEmail">
-              <InputGroup className={styles.oilSelectGrp}>
-                <Form.Select name="currentOil" id="currentOil" className={styles.oilSelect}>
-                  {allOils.map((oil) => <option key={oil.id} value={oil.id}>{oil.name}</option>)}
-                </Form.Select>
-                <Button type="button" onClick={addOils} className={styles.zBtn} id="zBtn">
-                  +
-                </Button>
-              </InputGroup>
-              <Form.Text>Select an Oil to add</Form.Text>
-            </Form.Group>
-          </Form>
-        </div>
-        <div className="oil-list-container">
-          {/* Form for each oil to add individual amounts */}
-          <section>
-            {oils?.length > 0
-              ? (
-                <>
-                  <hr />
-                  <h3 className={styles.sectionHeader}>Oils:</h3>
-                  <Form onSubmit={calculateRecipe}>
-                    {oils?.map((oil) => (
-                      <section key={oil.oilId}>
-                        <div className={styles.oilNameBtn}>
-                          <h5 key={oil.oilId} className={styles.oilName}>{`${oils.indexOf(oil) + 1}. ${oil.name}`}</h5>
-                          <Button onClick={removeOil} value={oil.oilId} className={styles.removeOilBtn}>remove</Button>
-                        </div>
-                        <Form.Group className={styles.singleOil}>
-                          <Form.Control
-                            className={styles.oilInput}
-                            id={`oilAmount--${oil.oilId}`}
-                            name={oil.oilId}
-                            type="number"
-                            onChange={handleAmountChange}
-                            {...oil.amount > 0 ? { value: Number(oil.amount) } : { value: '' }}
-                          />
-                          <Form.Text>Amount in ounces</Form.Text>
-                        </Form.Group>
-                      </section>
-                    ))}
-                    <Button variant="primary" type="submit">Calculate Recipe</Button>
-                  </Form>
-                </>
-              )
-              : ''}
-          </section>
-        </div>
+      <div className="recipe-form-container">
+        {/* Initial Form to add Total oil amount, water percentage, and super fat */}
+        <Form>
+          <Form.Group className={styles.formGroup}>
+            <Form.Control
+              className={styles.formInputFieldTop}
+              type="number"
+              placeholder="Enter total weight of oil in ounces"
+              name="totalOil"
+              value={formInput.totalOil}
+              onChange={handleChange}
+            />
+            <Form.Text>Enter total weight of oils in ounces</Form.Text>
+          </Form.Group>
+          <Form.Group className={styles.formGroup}>
+            <Form.Control
+              className={styles.formInputFieldTop}
+              type="number"
+              placeholder="Water as a percent of oils"
+              name="waterPercentage"
+              value={formInput.waterPercentage}
+              onChange={handleChange}
+            />
+            <Form.Text>Water as a percent of oils</Form.Text>
+          </Form.Group>
+          <Form.Group className={styles.formGroup}>
+            <Form.Control
+              className={styles.formInputFieldTop}
+              type="number"
+              placeholder="Super Fat Percentage"
+              name="superFat"
+              value={formInput.superFat}
+              onChange={handleChange}
+            />
+            <Form.Text>Super Fat Percentage</Form.Text>
+          </Form.Group>
+        </Form>
+        <hr />
+        {/* Form Select to add oils to recipe */}
+        <h3 className={styles.sectionHeader}>Select Oils</h3>
+        <Form>
+          <Form.Group className={styles.formGroup} controlId="formBasicEmail">
+            <InputGroup className={styles.oilSelectGrp}>
+              <Form.Select name="currentOil" id="currentOil" className={styles.oilSelect}>
+                {allOils.map((oil) => <option key={oil.id} value={oil.id}>{oil.name}</option>)}
+              </Form.Select>
+              <Button type="button" onClick={addOils} className={styles.zBtn} id="zBtn">
+                +
+              </Button>
+            </InputGroup>
+            <Form.Text>Select an Oil to add</Form.Text>
+          </Form.Group>
+        </Form>
+      </div>
+      <div className="oil-list-container">
+        {/* Form for each oil to add individual amounts */}
+        <section>
+          {oils?.length > 0
+            ? (
+              <>
+                <hr />
+                <h3 className={styles.sectionHeader}>Oils:</h3>
+                <Form onSubmit={calculateRecipe}>
+                  {oils?.map((oil) => (
+                    <section key={oil.oilId}>
+                      <div className={styles.oilNameBtn}>
+                        <h5 key={oil.oilId} className={styles.oilName}>{`${oils.indexOf(oil) + 1}. ${oil.name}`}</h5>
+                        <Button onClick={removeOil} value={oil.oilId} className={styles.removeOilBtn}>remove</Button>
+                      </div>
+                      <Form.Group className={styles.singleOil}>
+                        <Form.Control
+                          className={styles.oilInput}
+                          id={`oilAmount--${oil.oilId}`}
+                          name={oil.oilId}
+                          type="number"
+                          onChange={handleAmountChange}
+                          {...oil.amount > 0 ? { value: Number(oil.amount) } : { value: '' }}
+                        />
+                        <Form.Text>Amount in ounces</Form.Text>
+                      </Form.Group>
+                    </section>
+                  ))}
+                  <Button variant="primary" type="submit">Calculate Recipe</Button>
+                </Form>
+              </>
+            )
+            : ''}
+        </section>
       </div>
       <hr />
       {/* If there is a recipe calculated, show the results and a button to save the recipe

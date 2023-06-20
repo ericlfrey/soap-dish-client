@@ -3,7 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
-import { Heart, HeartFill } from 'react-bootstrap-icons';
+import {
+  Heart, HeartFill, Trash, PencilSquare,
+} from 'react-bootstrap-icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -11,6 +13,8 @@ import {
 } from '../../utils/data/recipeData';
 import { useAuth } from '../../utils/context/authContext';
 import styles from './RecipeDetails.module.css';
+import CommentForm from '../CommentForm/CommentForm';
+import Comment from '../Comment/Comment';
 
 export default function RecipeDetails({ id }) {
   const [recipe, setRecipe] = useState({});
@@ -46,6 +50,29 @@ export default function RecipeDetails({ id }) {
         <Card.Body>
           <section className={styles.favoriteDiv}>
             <Card.Title className={styles.title}>{recipe.title}</Card.Title>
+            {user.id === recipe.maker_id
+              ? (
+                <>
+                  <Link href={`/recipe/edit/${id}`} passHref>
+                    <button
+                      type="button"
+                      className={styles.favoriteBtn}
+                    >
+                      <PencilSquare className={styles.edit} />
+                      Edit
+                    </button>
+                  </Link>
+                  <button
+                    type="button"
+                    className={styles.favoriteBtn}
+                    onClick={handleDelete}
+                  >
+                    <Trash className={styles.trash} />
+                    Delete
+                  </button>
+                </>
+              )
+              : ''}
             <button type="button" className={styles.favoriteBtn} onClick={handleFavorite}>
               {recipe.is_favorite
                 ? <HeartFill className={styles.heartFill} />
@@ -75,16 +102,26 @@ export default function RecipeDetails({ id }) {
           <hr />
           <Card.Title>Notes:</Card.Title>
           <Card.Text>{recipe.notes}</Card.Text>
-          {user.uid === recipe.maker?.uid
-            ? (
-              <>
-                <hr />
-                <Link href={`/recipe/edit/${id}`} passHref>
-                  <Card.Link href="#">Edit</Card.Link>
-                </Link><Card.Link href="#" onClick={handleDelete}>Delete</Card.Link>
-              </>
-            )
-            : ''}
+          <>
+            <hr />
+            <Card.Title className={styles.flex}>Comments
+              <div className={styles.commentNumber}>{recipe.recipe_comments?.length}</div>
+              :
+            </Card.Title>
+            {recipe.recipe_comments?.map((comment) => (
+              <Comment
+                key={comment.comment_id}
+                text={comment.text}
+                commentId={comment.comment_id}
+                commenterName={comment.commenter_name}
+                commenterId={comment.commenter_id}
+                date={comment.date}
+                userId={user.id}
+                refreshPage={refreshPage}
+              />
+            ))}
+          </>
+          <CommentForm recipeId={id} refreshPage={refreshPage} />
         </Card.Body>
       </Card>
     </div>

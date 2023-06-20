@@ -1,0 +1,42 @@
+.commentCard {
+  background-color: whitesmoke;
+  margin-bottom: 0.3rem;
+}
+
+.name {
+  font-size: 0.65rem;
+}
+
+.date {
+  font-size: 0.45rem;
+  text-decoration: underline;
+  margin-bottom: 0.3rem;
+}
+
+.text {
+  font-size: 0.75rem;
+}
+
+.editIcon {
+  cursor: pointer;
+  fill: var(--light-blue)
+}
+
+.trashIcon {
+  cursor: pointer;
+  fill: maroon;
+}
+
+.saveBtn,
+.saveBtn:hover {
+  all: unset;
+  color: green;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.saveIcon {
+  font-size: 1rem;
+  fill: green;
+  margin-right: 0.3rem;
+}

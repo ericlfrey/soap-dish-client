@@ -7,12 +7,13 @@
   margin: 1rem 0 2rem 0;
   background-color: var(--linen);
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  width: 17rem;
+  width: 90%;
   font-size: .8rem;
 }
 
 .favoriteDiv {
   display: flex;
+  justify-content: space-between;
   margin-bottom: 1rem;
 }
 
@@ -45,6 +46,18 @@
   margin-right: .5rem;
 }
 
+.trash {
+  fill: maroon;
+  font-size: 1rem;
+  margin-right: .5rem;
+}
+
+.edit {
+  fill: var(--light-blue);
+  font-size: 1rem;
+  margin-right: .5rem;
+}
+
 .ingredientsSection {
   display: flex;
   justify-content: space-between;
@@ -54,4 +67,23 @@
 
 .ingredients {
   margin: 0;
+}
+
+.commentNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.2rem;
+  width: 1.2rem;
+  font-size: 0.6rem;
+  background-color: var(--teal);
+  color: var(--linen);
+  padding: .6rem;
+  border-radius: 50%;
+  margin: 0 .3rem
+}
+
+.flex {
+  display: flex;
+  align-items: center;
 }
