@@ -5,3 +5,7 @@
 .commentBtn {
   font-size: .5rem;
 }
+
+.commentIcons {
+  cursor: pointer;
+}

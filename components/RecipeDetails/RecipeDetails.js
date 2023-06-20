@@ -96,9 +96,11 @@ export default function RecipeDetails({ id }) {
                   <Comment
                     key={comment.comment_id}
                     text={comment.text}
+                    commentId={comment.comment_id}
                     commenterName={comment.commenter_name}
                     commenterId={comment.commenter_id}
                     userId={user.id}
+                    refreshPage={refreshPage}
                   />
                 ))}
               </>
