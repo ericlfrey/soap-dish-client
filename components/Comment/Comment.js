@@ -60,12 +60,7 @@ export default function Comment({
                 onChange={handleChange}
                 required
               />
-              {/* <span className={styles.saveSpan}> */}
               <Button onClick={handleSubmit} className={styles.saveBtn}><Save className={styles.saveIcon} /> Save</Button>
-              {/* <Save onClick={handleSubmit} className={styles.saveIcon} /> */}
-              {/* <p>Save</p> */}
-              {/* </span> */}
-              {/* <Button onClick={handleSubmit}>save</Button> */}
             </>
           )}
         {commenterId === userId && !show

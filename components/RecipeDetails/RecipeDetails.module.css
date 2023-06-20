@@ -7,7 +7,6 @@
   margin: 1rem 0 2rem 0;
   background-color: var(--linen);
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  /* width: 17rem; */
   width: 90%;
   font-size: .8rem;
 }
@@ -43,6 +42,18 @@
 .heart,
 .heartFill {
   fill: darkred;
+  font-size: 1rem;
+  margin-right: .5rem;
+}
+
+.trash {
+  fill: maroon;
+  font-size: 1rem;
+  margin-right: .5rem;
+}
+
+.edit {
+  fill: var(--light-blue);
   font-size: 1rem;
   margin-right: .5rem;
 }
