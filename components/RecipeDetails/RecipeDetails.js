@@ -50,7 +50,7 @@ export default function RecipeDetails({ id }) {
         <Card.Body>
           <section className={styles.favoriteDiv}>
             <Card.Title className={styles.title}>{recipe.title}</Card.Title>
-            {user.id === recipe.maker_id
+            {user.id === recipe.maker
               ? (
                 <>
                   <Link href={`/recipe/edit/${id}`} passHref>
@@ -105,17 +105,17 @@ export default function RecipeDetails({ id }) {
           <>
             <hr />
             <Card.Title className={styles.flex}>Comments
-              <div className={styles.commentNumber}>{recipe.recipe_comments?.length}</div>
+              <div className={styles.commentNumber}>{recipe.comments?.length}</div>
               :
             </Card.Title>
-            {recipe.recipe_comments?.map((comment) => (
+            {recipe.comments?.map((comment) => (
               <Comment
-                key={comment.comment_id}
+                key={comment.id}
                 text={comment.text}
-                commentId={comment.comment_id}
+                commentId={comment.id}
                 commenterName={comment.commenter_name}
-                commenterId={comment.commenter_id}
-                date={comment.date}
+                commenterId={comment.soaper}
+                date={comment.date_added}
                 userId={user.id}
                 refreshPage={refreshPage}
               />
