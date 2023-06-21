@@ -25,7 +25,6 @@ export default function CommentForm({ recipeId, refreshPage }) {
     e.preventDefault();
     const payload = {
       text: formInput.text,
-      dateAdded: new Date(),
       recipeId,
     };
     setFormInput(initialState);
