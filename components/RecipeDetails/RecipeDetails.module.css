@@ -69,6 +69,10 @@
   margin: 0;
 }
 
+.hrMargin {
+  margin-top: 1.5rem;
+}
+
 .commentNumber {
   display: flex;
   justify-content: center;
