@@ -84,7 +84,7 @@ export default function RecipeDetails({ id }) {
           <Card.Title>Ingredients:</Card.Title>
           {recipe.recipe_oils?.map((oil) => (
             <section key={oil.id} className={styles.ingredientsSection}>
-              <Card.Text className={styles.ingredients}>{oil.oil_name}:</Card.Text>
+              <Card.Text className={styles.ingredients}>{oil.oil.name}:</Card.Text>
               <Card.Text className={styles.ingredients}>{Number(oil.amount)} oz</Card.Text>
             </section>
           ))}
