@@ -19,7 +19,7 @@ export default function EditRecipePage() {
   const oilList = recipe.recipe_oils?.map((recipeOil) => ({
     id: recipeOil.id,
     oilId: recipeOil.oil.id,
-    name: recipeOil.oil_name,
+    name: recipeOil.oil.name,
     amount: recipeOil.amount,
     sap: recipeOil.oil.sap,
   }));
