@@ -248,7 +248,7 @@ export default function RecipeForm({ recipeObject, totalOil, oilList }) {
                           onChange={handleAmountChange}
                           {...oil.amount > 0 ? { value: Number(oil.amount) } : { value: '' }}
                         />
-                        <Form.Text>Amount in ounces</Form.Text>
+                        <Form.Text>oz.</Form.Text>
                       </Form.Group>
                     </section>
                   ))}

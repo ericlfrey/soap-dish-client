@@ -96,7 +96,7 @@ export default function RecipeDetails({ id }) {
             <Card.Text className={styles.ingredients}>Lye (NaOH):</Card.Text>
             <Card.Text className={styles.ingredients}>{Number(recipe.lye_amount)} oz</Card.Text>
           </section>
-          <hr />
+          <hr className={styles.hrMargin} />
           <Card.Title>Description:</Card.Title>
           <Card.Text>{recipe.description}</Card.Text>
           <hr />
