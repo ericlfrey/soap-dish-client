@@ -1,5 +1,5 @@
 # The Soap Dish
-Watch the [Video Walkthrough](https://www.loom.com/share/8a691f8f485d4807accd0458dcbced52) on Loom! 
+Watch the [Video Walkthrough](https://www.loom.com/share/25365a2897584b56932bf286f0173da8?sid=825496a2-3a9e-481a-a53e-1a911ceb1399) on Loom! 
 
 ![logo](https://user-images.githubusercontent.com/107942776/246680367-2b14c0d1-f0ad-451c-a60e-4792a6046e58.png)
 
@@ -32,7 +32,7 @@ Modern Soap Makers have few choices when it comes to designing and calculating s
 
 
 ## Try the app yourself
-Watch the [Video Walkthrough](https://www.loom.com/share/8a691f8f485d4807accd0458dcbced52) on Loom! 
+Watch the [Video Walkthrough](https://www.loom.com/share/25365a2897584b56932bf286f0173da8?sid=825496a2-3a9e-481a-a53e-1a911ceb1399) on Loom! 
 
 1. Set up a [Firebase](https://firebase.google.com/) project - [Here's how to setup](https://www.loom.com/share/163ffe1539bb482196efa713ed6231e9)
 2. Clone TSD to your local machine 
