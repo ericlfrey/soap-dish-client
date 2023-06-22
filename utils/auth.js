@@ -5,12 +5,10 @@ import { clientCredentials } from './client';
 const checkUser = (uid) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/checkuser`, {
     method: 'POST',
-    body: JSON.stringify({
-      uid,
-    }),
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
+      Authorization: uid,
     },
   })
     .then((resp) => resolve(resp.json()))
@@ -18,12 +16,17 @@ const checkUser = (uid) => new Promise((resolve, reject) => {
 });
 
 const registerUser = (userInfo) => new Promise((resolve, reject) => {
+  const { firstName, lastName } = userInfo;
   fetch(`${clientCredentials.databaseURL}/register`, {
     method: 'POST',
-    body: JSON.stringify(userInfo),
+    body: JSON.stringify({
+      firstName,
+      lastName,
+    }),
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
+      Authorization: userInfo.uid,
     },
   })
     .then((resp) => resolve(resp.json()))
